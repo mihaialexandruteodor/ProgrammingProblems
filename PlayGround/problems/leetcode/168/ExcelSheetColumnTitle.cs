@@ -5,6 +5,11 @@ public class ExcelSheetColumnTitle : IBaseSolution {
         Console.WriteLine(ConvertToTitle(52));
     }
 
+    public string solve(int val)
+    {
+        return ConvertToTitle(val);
+    }
+
     public string ConvertToTitle(int columnNumber) {
         string res = "";
         bool remainder = false;
