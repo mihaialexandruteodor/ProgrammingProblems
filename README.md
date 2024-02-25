@@ -9,4 +9,4 @@ Solving various problems from Leetcode and past interviews
 
 ###
 168. Excel Sheet Column Title
-- [] https://leetcode.com/problems/excel-sheet-column-title/description/
+- [x] https://leetcode.com/problems/excel-sheet-column-title/description/
