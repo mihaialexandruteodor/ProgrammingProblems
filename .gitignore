@@ -384,6 +384,10 @@ FodyWeavers.xsd
 !.vscode/extensions.json
 *.code-workspace
 
+#Visual Studio
+*.sln
+*.csproj
+
 # Local History for Visual Studio Code
 .history/
 
@@ -396,3 +400,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#DS Store - Mac
+._*
+
+#debug
+bin/Debug
+obj
