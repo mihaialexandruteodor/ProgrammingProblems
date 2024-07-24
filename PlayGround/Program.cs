@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlayGround.problems.DSA;
+using System;
 using System.Linq;
     
     
@@ -7,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new ExcelSheetColumnTitle();
+        IBaseSolution solution = new LinkedListExample();
 
         solution.solve();
     }
