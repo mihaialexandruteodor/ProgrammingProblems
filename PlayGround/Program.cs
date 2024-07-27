@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new LinkedListExample();
+        IBaseSolution solution = new BestTimeToBuySellStock();
 
         solution.solve();
     }
