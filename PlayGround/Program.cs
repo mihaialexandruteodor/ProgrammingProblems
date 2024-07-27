@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new HouseRobber();
+        IBaseSolution solution = new CourseSchedule();
 
         solution.solve();
     }
