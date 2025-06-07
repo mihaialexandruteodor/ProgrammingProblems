@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new PalindromicSubstrings();
+        IBaseSolution solution = new WordBreak();
 
         solution.solve();
     }
