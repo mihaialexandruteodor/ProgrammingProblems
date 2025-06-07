@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new Q2();
+        IBaseSolution solution = new CloneGraphDeepCopy();
 
         solution.solve();
     }
