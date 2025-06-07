@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class CloneGraphDeepCopy : IBaseSolution
 {
     //https://leetcode.com/problems/clone-graph/
+    //O(n), n = edges + vertices
     // Definition for a Node.
     public class Node
     {
@@ -30,14 +31,32 @@ public class CloneGraphDeepCopy : IBaseSolution
     }
 
     public void solve() {
-        /*int[] nums = new int[] { -1, 1 };
-        var res = RearrangeArray(nums);
-        foreach (int item in res)
-            Console.Write(item + " ");
-        Console.WriteLine();*/
+        int[][] edges = [[2, 4], [1, 3], [2, 4], [1, 3]];
+        /*to do - solver*/
     }
-    public Node CloneGraph(Node node) {
-        
+    public Node CloneGraph(Node node)
+    {
+        if (node == null)
+            return null;
 
+        Dictionary<Node, Node> nodes = new();
+
+        Node dfsCopy(Node node)
+        {
+            if (nodes.ContainsKey(node))
+            {
+                return nodes[node];
+            }
+
+            Node copy = new Node(node.val);
+            nodes.Add(node, copy);
+            foreach (Node neighbor in node.neighbors) { 
+                copy.neighbors.Add(dfsCopy(neighbor));
+            }
+
+            return copy;
+        }
+
+        return dfsCopy(node);
     }
 }
