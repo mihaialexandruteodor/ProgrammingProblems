@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new CloneGraphDeepCopy();
+        IBaseSolution solution = new PalindromicSubstrings();
 
         solution.solve();
     }
