@@ -23,6 +23,7 @@ public class WordBreak : IBaseSolution
             var dp = new bool[s.Length + 1];        // dp[i] == true means:
                                                     // The substring s[0..i) (from index 0 up to but not including i)
                                                     // can be segmented into words from wordDict.
+                                                    // initally filled with 'False' values only
                         dp[0] = true; // empty string is always "breakable"
 
             for (int i = 1; i <= s.Length; i++)     // This loop goes through every possible end index i in the string s
