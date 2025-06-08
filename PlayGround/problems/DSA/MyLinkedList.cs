@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PlayGround.problems.DSA
 {
+    // https://leetcode.com/explore/learn/card/linked-list/209/singly-linked-list/1290/
     public class MyLinkedList
     {
         public class Node
@@ -131,6 +132,23 @@ namespace PlayGround.problems.DSA
             }
 
             listSize--;
+        }
+
+        public bool HasCycle()
+        {
+            Node slow = head;
+            Node fast = head;
+
+            while (fast != null && fast.next != null)
+            {
+                slow = slow.next;           // move 1 step
+                fast = fast.next.next;      // move 2 steps
+
+                if (slow == fast)
+                    return true;            // cycle detected
+            }
+
+            return false;                   // no cycle
         }
     }
 
