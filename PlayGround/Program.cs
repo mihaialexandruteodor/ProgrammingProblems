@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new WordBreak();
+        IBaseSolution solution = new CheckBST();
 
         solution.solve();
     }
