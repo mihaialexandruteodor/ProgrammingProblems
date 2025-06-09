@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PlayGround.problems.DSA.IntersectionOfTwoLinkedLists;
 
 namespace PlayGround.problems.DSA
 {
@@ -168,6 +169,22 @@ namespace PlayGround.problems.DSA
 
             Console.WriteLine(result);
             Console.WriteLine();
+        }
+
+        public ListNode ReverseList(ListNode head)
+        {
+            ListNode prev = null;
+            ListNode curr = head;
+
+            while (curr != null)
+            {
+                ListNode next = curr.next; // temporarily store next node
+                curr.next = prev;          // reverse the current node's pointer
+                prev = curr;               // move prev one step forward
+                curr = next;               // move curr one step forward
+            }
+
+            return prev; // new head of the reversed list
         }
 
     }
