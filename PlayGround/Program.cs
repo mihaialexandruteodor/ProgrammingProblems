@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new ReplaceWords();
+        IBaseSolution solution = new ValidParentheses();
 
         solution.solve();
     }
