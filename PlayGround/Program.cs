@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new MergeKSortedLists();
+        IBaseSolution solution = new MaxProductSubarray();
 
         solution.solve();
     }
