@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new ReorderList();
+        IBaseSolution solution = new MergeKSortedLists();
 
         solution.solve();
     }
