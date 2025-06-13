@@ -8,7 +8,7 @@ public class Program
 {
 	public static void Main()
 	{
-        IBaseSolution solution = new MaxProductSubarray();
+        IBaseSolution solution = new CheapestFlightsKStops();
 
         solution.solve();
     }
