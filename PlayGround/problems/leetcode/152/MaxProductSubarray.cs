@@ -3,8 +3,7 @@
 [Description("MaxProductSubarray")]
 public class MaxProductSubarray : IBaseSolution
 {
-    // 
-    // STACK PROBLEM
+    // https://leetcode.com/problems/maximum-product-subarray/
     public void solve()
     {
         Solution solution = new Solution();

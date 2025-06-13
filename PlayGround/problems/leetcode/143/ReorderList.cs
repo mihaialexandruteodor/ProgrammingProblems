@@ -4,8 +4,7 @@ using static PlayGround.problems.DSA.IntersectionOfTwoLinkedLists;
 [Description("ReorderList")]
 public class ReorderList : IBaseSolution
 {
-    // 
-    // STACK PROBLEM
+    // https://leetcode.com/problems/reorder-list/
     public void solve()
     {
 
