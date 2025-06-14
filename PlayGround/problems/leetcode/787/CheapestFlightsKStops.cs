@@ -3,8 +3,9 @@
 [Description("CheapestFlightsKStops")]
 public class CheapestFlightsKStops : IBaseSolution
 {
-    // 
-    // STACK PROBLEM
+    // https://leetcode.com/problems/cheapest-flights-within-k-stops/description/
+    // https://www.youtube.com/watch?v=5eIK3zUdYmE
+    // got this at a Booking Holdings interview, ridiculously hard to figure on the spot...
     public void solve()
     {
         Solution solution = new Solution();
