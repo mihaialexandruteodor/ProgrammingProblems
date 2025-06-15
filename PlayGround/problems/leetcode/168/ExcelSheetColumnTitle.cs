@@ -1,36 +1,41 @@
-public class ExcelSheetColumnTitle : IBaseSolution {
-
-    public void solve()
+namespace problems.leetcode._168
+{
+    public class ExcelSheetColumnTitle : IBaseSolution
     {
-        Console.WriteLine(ConvertToTitle(52));
-    }
 
-    public string solve(int val)
-    {
-        return ConvertToTitle(val);
-    }
-
-    public string ConvertToTitle(int columnNumber) {
-        string res = "";
-        bool remainder = false;
-
-        while(columnNumber > 0)
+        public void solve()
         {
-            int currDigitBase26 =  (columnNumber % 26) - 1;
-            columnNumber /= 26;
+            Console.WriteLine(ConvertToTitle(52));
+        }
 
-            if(currDigitBase26 == -1)
+        public string solve(int val)
+        {
+            return ConvertToTitle(val);
+        }
+
+        public string ConvertToTitle(int columnNumber)
+        {
+            string res = "";
+            bool remainder = false;
+
+            while (columnNumber > 0)
             {
-                currDigitBase26 = 25;
-                columnNumber--;
+                int currDigitBase26 = (columnNumber % 26) - 1;
+                columnNumber /= 26;
+
+                if (currDigitBase26 == -1)
+                {
+                    currDigitBase26 = 25;
+                    columnNumber--;
+                }
+
+                char currentChar = (char)('A' + currDigitBase26);
+                res = currentChar + res;
+
             }
 
-            char currentChar =(char)('A'+ currDigitBase26);
-            res = currentChar + res;
-            
+            return res;
         }
-        
-        return res;
-    }
 
+    }
 }

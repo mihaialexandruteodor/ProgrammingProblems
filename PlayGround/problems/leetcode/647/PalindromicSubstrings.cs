@@ -1,81 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class PalindromicSubstrings: IBaseSolution
+namespace problems.leetcode._647
 {
-    //https://leetcode.com/problems/palindromic-substrings/
-
-    public void solve()
+    public class PalindromicSubstrings : IBaseSolution
     {
-        Solution solution = new Solution();
-        Console.WriteLine("abc, expect 3, actual: " + solution.CountSubstrings("abc"));
-        Console.WriteLine("aaa, expect 6, actual: " + solution.CountSubstrings("aaa"));
-    }
+        //https://leetcode.com/problems/palindromic-substrings/
 
-    // neetcode solution, waaay more efficient -> O(n^2)
-    // https://www.youtube.com/watch?v=4RACzI5-du8
-    public class Solution
-    {
-        public int CountSubstrings(string s)
+        public void solve()
         {
-            int res = 0;
-
-            for (int i = 0; i < s.Length; i++)
-            {
-                // Odd-length palindromes
-                int l = i, r = i;
-                while (l >= 0 && r < s.Length && s[l] == s[r])
-                {
-                    res++;
-                    l--;
-                    r++;
-                }
-
-                // Even-length palindromes
-                l = i;
-                r = i + 1;
-                while (l >= 0 && r < s.Length && s[l] == s[r])
-                {
-                    res++;
-                    l--;
-                    r++;
-                }
-            }
-
-            return res;
+            Solution solution = new Solution();
+            Console.WriteLine("abc, expect 3, actual: " + solution.CountSubstrings("abc"));
+            Console.WriteLine("aaa, expect 6, actual: " + solution.CountSubstrings("aaa"));
         }
-    }
 
-    // my approach
-    /*public class Solution
-    {
-        public bool checkIfStringIsPalindrome(int stIndex, int edIndex, string s)
+        // neetcode solution, waaay more efficient -> O(n^2)
+        // https://www.youtube.com/watch?v=4RACzI5-du8
+        public class Solution
         {
-            if (string.IsNullOrEmpty(s) || stIndex < 0 || edIndex >= s.Length || stIndex > edIndex)
-                return false;
-
-            while (stIndex < edIndex)
+            public int CountSubstrings(string s)
             {
-                if (s[stIndex] != s[edIndex])
+                int res = 0;
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    // Odd-length palindromes
+                    int l = i, r = i;
+                    while (l >= 0 && r < s.Length && s[l] == s[r])
+                    {
+                        res++;
+                        l--;
+                        r++;
+                    }
+
+                    // Even-length palindromes
+                    l = i;
+                    r = i + 1;
+                    while (l >= 0 && r < s.Length && s[l] == s[r])
+                    {
+                        res++;
+                        l--;
+                        r++;
+                    }
+                }
+
+                return res;
+            }
+        }
+
+        // my approach
+        /*public class Solution
+        {
+            public bool checkIfStringIsPalindrome(int stIndex, int edIndex, string s)
+            {
+                if (string.IsNullOrEmpty(s) || stIndex < 0 || edIndex >= s.Length || stIndex > edIndex)
                     return false;
-                stIndex++;
-                edIndex--;
+
+                while (stIndex < edIndex)
+                {
+                    if (s[stIndex] != s[edIndex])
+                        return false;
+                    stIndex++;
+                    edIndex--;
+                }
+
+                return true;
             }
 
-            return true;
-        }
+            public int CountSubstrings(string s)
+            {
+                int count = s.Length;
+                for (int i = 0; i < s.Length - 1; ++i)
+                    for (int j = i + 1; j < s.Length; ++j)
+                        if (checkIfStringIsPalindrome(i, j, s))
+                            count++;
 
-        public int CountSubstrings(string s)
-        {
-            int count = s.Length;
-            for (int i = 0; i < s.Length - 1; ++i)
-                for (int j = i + 1; j < s.Length; ++j)
-                    if (checkIfStringIsPalindrome(i, j, s))
-                        count++;
+                return count;
+            }
+        }*/
 
-            return count;
-        }
-    }*/
-
-
+    }
 }
