@@ -17,15 +17,52 @@ namespace problems.leetcode._692
         // https://leetcode.com/problems/top-k-frequent-words/
         public void solve()
         {
-                printProblem();
+            printProblem();
             Solution solution = new Solution();
-            Console.WriteLine("Expected : ");
-            Console.WriteLine("Actual: ");
+            Console.WriteLine("[\"i\",\"love\",\"leetcode\",\"i\",\"love\",\"coding\"], Expected : [\"i\",\"love\",\"coding\"]");
+            Console.WriteLine("Actual: " + "[" + string.Join(",", solution.TopKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 3)) + "]");
         }
 
-    public class Solution
-    {
+        public class Solution
+        {
+            // Custom comparer to sort by frequency descending, then lex ascending
+            public class WordFreqComparer : IComparer<(int freq, string word)>
+            {
+                public int Compare((int freq, string word) a, (int freq, string word) b)
+                {
+                    int freqCompare = b.freq.CompareTo(a.freq); // higher freq first
+                    if (freqCompare != 0)
+                        return freqCompare;
+
+                    return a.word.CompareTo(b.word); // lex order for tie
+                }
+            }
+
+            public IList<string> TopKFrequent(string[] words, int k)
+            {
+                var dict = new Dictionary<string, int>();
+                foreach (var word in words)
+                {
+                    dict[word] = dict.GetValueOrDefault(word, 0) + 1;
+                }
+
+                // Priority queue with custom comparer
+                var pq = new PriorityQueue<string, (int freq, string word)>(new WordFreqComparer());
+
+                foreach (var kvp in dict)
+                {
+                    pq.Enqueue(kvp.Key, (kvp.Value, kvp.Key));
+                }
+
+                var res = new List<string>();
+                for (int i = 0; i < k && pq.Count > 0; i++)
+                {
+                    res.Add(pq.Dequeue());
+                }
+
+                return res;
+            }
+        }
 
     }
-}
 }
