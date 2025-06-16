@@ -9,8 +9,19 @@ namespace problems.leetcode._139
     // https://www.youtube.com/watch?v=Sx9NNgInc3A
     public class WordBreak : IBaseSolution
     {
+        public void printProblem()
+        {
+            Console.Write("Level: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("MEDIUM");
+            Console.ResetColor();
+            Console.WriteLine("Problem: Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.\r\n\r\nNote that the same word in the dictionary may be reused multiple times in the segmentation.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: s = \"leetcode\", wordDict = [\"leet\",\"code\"]\r\nOutput: true\r\nExplanation: Return true because \"leetcode\" can be segmented as \"leet code\".\r\nExample 2:\r\n\r\nInput: s = \"applepenapple\", wordDict = [\"apple\",\"pen\"]\r\nOutput: true\r\nExplanation: Return true because \"applepenapple\" can be segmented as \"apple pen apple\".\r\nNote that you are allowed to reuse a dictionary word.\r\nExample 3:\r\n\r\nInput: s = \"catsandog\", wordDict = [\"cats\",\"dog\",\"sand\",\"and\",\"cat\"]\r\nOutput: false");
+            Console.WriteLine();
+        }
+
         public void solve()
         {
+            printProblem();
             Solution solution = new Solution();
             Console.WriteLine("Expected True, got: " + solution.WordBreak("aaaaaaa", ["aaaa", "aaa"]));
             Console.WriteLine("Expected True, got: " + solution.WordBreak("leetcode", ["leet", "code"]));

@@ -5,6 +5,7 @@ namespace problems.leetcode._168
 
         public void solve()
         {
+            printProblem();
             Console.WriteLine(ConvertToTitle(52));
         }
 
@@ -37,5 +38,14 @@ namespace problems.leetcode._168
             return res;
         }
 
+        public void printProblem()
+        {
+            Console.Write("Level: ");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("EASY");
+            Console.ResetColor();
+            Console.WriteLine("Problem: Given an integer columnNumber, return its corresponding column title as it appears in an Excel sheet.\r\n\r\nFor example:\r\n\r\nA -> 1\r\nB -> 2\r\nC -> 3\r\n...\r\nZ -> 26\r\nAA -> 27\r\nAB -> 28 \r\n...\r\n \r\n\r\nExample 1:\r\n\r\nInput: columnNumber = 1\r\nOutput: \"A\"\r\nExample 2:\r\n\r\nInput: columnNumber = 28\r\nOutput: \"AB\"\r\nExample 3:\r\n\r\nInput: columnNumber = 701\r\nOutput: \"ZY\"\r\n \r\n\r\nConstraints:\r\n\r\n1 <= columnNumber <= 231 - 1");
+            Console.WriteLine();
+        }
     }
 }

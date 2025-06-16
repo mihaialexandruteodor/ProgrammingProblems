@@ -1,8 +1,7 @@
 public interface IBaseSolution {
-    public void solve()
-    {
 
-    }
+    public void printProblem();
+    public void solve();
 
     public string solve(int val)
     {

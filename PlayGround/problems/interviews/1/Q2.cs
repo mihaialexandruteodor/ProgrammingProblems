@@ -43,4 +43,8 @@ public class Q2 : IBaseSolution
 
     }
 
+    public void printProblem()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -18,9 +18,15 @@ namespace PlayGround.problems.DSA
      */
     public class IntersectionOfTwoLinkedLists : IBaseSolution
     {
+        public void printProblem()
+        {
+            Console.WriteLine("Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.");
+            Console.WriteLine();
+        }
 
         public void solve()
         {
+            printProblem();
             // to do
         }
 
