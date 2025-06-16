@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text;
 
 namespace problems.leetcode._417
 {
@@ -20,13 +21,77 @@ namespace problems.leetcode._417
         {
             printProblem();
             Solution solution = new Solution();
-            Console.WriteLine("Expected : ");
-            Console.WriteLine("Actual: ");
+            Console.WriteLine("[[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]], Expected : [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]");
+            Console.Write("Actual: ");
+            PrintListOfLists(solution.PacificAtlantic([[1, 2, 2, 3, 5], [3, 2, 3, 4, 4], [2, 4, 5, 3, 1], [6, 7, 1, 4, 5], [5, 1, 1, 2, 4]]));
+        }
+
+        static void PrintListOfLists(IList<IList<int>> list)
+        {
+            var sb = new StringBuilder();
+            sb.Append("[");
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                sb.Append("[");
+                sb.Append(string.Join(",", list[i]));
+                sb.Append("]");
+                if (i < list.Count - 1)
+                    sb.Append(",");
+            }
+
+            sb.Append("]");
+            Console.WriteLine(sb.ToString());
         }
 
         public class Solution
         {
+            public IList<IList<int>> PacificAtlantic(int[][] heights)
+            {
+                int rows = heights.Length;
+                int cols = heights[0].Length;
+                List<List<int>> res = new();
 
+                void dfs(int r, int c, HashSet<(int, int)> visit, int prevHeight)
+                {
+                    if (visit.Contains((r, c)) ||
+                        r < 0 || c < 0 || r == rows || c == cols ||
+                        heights[r][c] < prevHeight)
+                        return;
+                    visit.Add((r, c));
+                    dfs(r + 1, c, visit, heights[r][c]);
+                    dfs(r - 1, c, visit, heights[r][c]);
+                    dfs(r, c + 1, visit, heights[r][c]);
+                    dfs(r, c - 1, visit, heights[r][c]);
+                }
+
+                var pac = new HashSet<(int, int)>();
+                var atl = new HashSet<(int, int)>();
+                for (int c = 0; c < cols; ++c)
+                {     //rows
+                    dfs(0, c, pac, heights[0][c]);
+                    dfs(rows - 1, c, atl, heights[rows - 1][c]);
+                }
+
+                for (int r = 0; r < rows; ++r)
+                {     //cols
+                    dfs(r, 0, pac, heights[r][0]);
+                    dfs(r, cols - 1, atl, heights[r][cols - 1]);
+                }
+
+                for (int r = 0; r < rows; ++r)
+                {
+                    for (int c = 0; c < cols; ++c)
+                    {
+                        if (pac.Contains((r, c)) && atl.Contains((r, c)))
+                        {
+                            res.Add([r, c]);
+                        }
+                    }
+                }
+
+                return res.Cast<IList<int>>().ToList(); ;
+            }
         }
     }
 }
