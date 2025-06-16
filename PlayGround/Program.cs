@@ -9,33 +9,84 @@ public class Program
 {
 	public static void Main()
 	{
-        Console.Write("Enter LeetCode problem number: ");
-        var input = Console.ReadLine();
+        var allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
-        if (!int.TryParse(input, out int problemNumber))
+        var solutions = allTypes
+            .Where(t => typeof(IBaseSolution).IsAssignableFrom(t)
+                        && t.IsClass && !t.IsAbstract
+                        && t.Namespace != null
+                        && t.Namespace.Contains(".leetcode._"))
+            .Select(t => new
+            {
+                Type = t,
+                Num = ExtractProblemNumber(t.Namespace!),
+                Name = t.Name
+            })
+            .Where(x => x.Num != null)
+            .OrderBy(x => x.Num)
+            .ToList();
+
+        if (!solutions.Any())
         {
-            Console.WriteLine("Invalid input.");
+            Console.WriteLine("No LeetCode solutions found.");
             return;
         }
 
-        // Construct the expected namespace
-        string targetNamespace = $"problems.leetcode._{problemNumber}";
+        int selected = 0;
+        ConsoleKey key;
 
-        // Get all loaded types in the current assembly
-        var solutionType = Assembly.GetExecutingAssembly()
-            .GetTypes()
-            .Where(t => t.IsClass && !t.IsAbstract)
-            .Where(t => t.Namespace == targetNamespace)
-            .FirstOrDefault(t => typeof(IBaseSolution).IsAssignableFrom(t));
-
-        if (solutionType == null)
+        do
         {
-            Console.WriteLine("Solution class not found or doesn't implement IBaseSolution.");
+            Console.Clear();
+            Console.WriteLine("Select a LeetCode problem:\n");
+
+            for (int i = 0; i < solutions.Count; i++)
+            {
+                if (i == selected)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                }
+
+                Console.WriteLine($"{solutions[i].Num} {solutions[i].Name}");
+
+                Console.ResetColor();
+            }
+
+            key = Console.ReadKey(true).Key;
+
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    selected = (selected == 0) ? solutions.Count - 1 : selected - 1;
+                    break;
+                case ConsoleKey.DownArrow:
+                    selected = (selected + 1) % solutions.Count;
+                    break;
+            }
+
+        } while (key != ConsoleKey.Enter);
+
+        var chosen = solutions[selected];
+        var instance = Activator.CreateInstance(chosen.Type) as IBaseSolution;
+
+        if (instance == null)
+        {
+            Console.WriteLine("Failed to instantiate solution.");
             return;
         }
 
-        // Instantiate and call solve
-        var solution = Activator.CreateInstance(solutionType) as IBaseSolution;
-        solution?.solve();
+        Console.Clear();
+        Console.WriteLine($"Running problem #{chosen.Num}: {chosen.Name}\n");
+        instance.solve();
+    }
+
+    static int? ExtractProblemNumber(string ns)
+    {
+        var idx = ns.IndexOf(".leetcode._");
+        if (idx == -1) return null;
+        var part = ns.Substring(idx + ".leetcode._".Length);
+        var digits = new string(part.TakeWhile(char.IsDigit).ToArray());
+        return int.TryParse(digits, out int num) ? num : null;
     }
 }
