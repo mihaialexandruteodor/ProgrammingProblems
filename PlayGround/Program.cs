@@ -8,7 +8,7 @@ using System.Reflection;
 public class Program
 {
 	public static void Main()
-	{
+    {
         var allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
         var solutions = allTypes
@@ -32,53 +32,60 @@ public class Program
             return;
         }
 
-        int selected = 0;
-        ConsoleKey key;
-
-        do
+        while (true) // <-- LOOP to repeat selection
         {
-            Console.Clear();
-            Console.WriteLine("Select a LeetCode problem:\n");
+            int selected = 0;
+            ConsoleKey key;
 
-            for (int i = 0; i < solutions.Count; i++)
+            do
             {
-                if (i == selected)
+                Console.Clear();
+                Console.WriteLine("Select a LeetCode problem:\n");
+
+                for (int i = 0; i < solutions.Count; i++)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
-                    Console.ForegroundColor = ConsoleColor.Black;
+                    if (i == selected)
+                    {
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
+
+                    Console.WriteLine($"{solutions[i].Num} {solutions[i].Name}");
+
+                    Console.ResetColor();
                 }
 
-                Console.WriteLine($"{solutions[i].Num} {solutions[i].Name}");
+                key = Console.ReadKey(true).Key;
 
-                Console.ResetColor();
-            }
+                switch (key)
+                {
+                    case ConsoleKey.UpArrow:
+                        selected = (selected == 0) ? solutions.Count - 1 : selected - 1;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selected = (selected + 1) % solutions.Count;
+                        break;
+                }
 
-            key = Console.ReadKey(true).Key;
+            } while (key != ConsoleKey.Enter);
 
-            switch (key)
+            var chosen = solutions[selected];
+            var instance = Activator.CreateInstance(chosen.Type) as IBaseSolution;
+
+            if (instance == null)
             {
-                case ConsoleKey.UpArrow:
-                    selected = (selected == 0) ? solutions.Count - 1 : selected - 1;
-                    break;
-                case ConsoleKey.DownArrow:
-                    selected = (selected + 1) % solutions.Count;
-                    break;
+                Console.WriteLine("Failed to instantiate solution.");
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine($"Running problem #{chosen.Num}: {chosen.Name}\n");
+                instance.solve();
             }
 
-        } while (key != ConsoleKey.Enter);
-
-        var chosen = solutions[selected];
-        var instance = Activator.CreateInstance(chosen.Type) as IBaseSolution;
-
-        if (instance == null)
-        {
-            Console.WriteLine("Failed to instantiate solution.");
-            return;
+            Console.WriteLine("\nPress Enter to return to the problem selector...");
+            while (Console.ReadKey(true).Key != ConsoleKey.Enter) ;
         }
-
-        Console.Clear();
-        Console.WriteLine($"Running problem #{chosen.Num}: {chosen.Name}\n");
-        instance.solve();
     }
 
     static int? ExtractProblemNumber(string ns)
