@@ -20,6 +20,11 @@ namespace PlayGround.problems.DSA
             Console.WriteLine();
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         public void solve()
         {
             printProblem();

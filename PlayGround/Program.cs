@@ -39,7 +39,7 @@ public class Program
 
             do
             {
-                Console.Clear();
+                ClearConsoleFully();
                 Console.WriteLine("Select a LeetCode problem:\n");
 
                 for (int i = 0; i < solutions.Count; i++)
@@ -78,13 +78,16 @@ public class Program
             }
             else
             {
-                Console.Clear();
+                ClearConsoleFully();
                 Console.WriteLine($"Running problem #{chosen.Num}: {chosen.Name}\n");
                 instance.solve();
+                Console.WriteLine("\n--- Source Code ---");
+                instance.printSource();
             }
 
             Console.WriteLine("\nPress Enter to return to the problem selector...");
-            while (Console.ReadKey(true).Key != ConsoleKey.Enter) ;
+            while (Console.ReadKey(true).Key != ConsoleKey.Enter);
+            ClearConsoleFully();
         }
     }
 
@@ -96,4 +99,26 @@ public class Program
         var digits = new string(part.TakeWhile(char.IsDigit).ToArray());
         return int.TryParse(digits, out int num) ? num : null;
     }
+
+    public static void ClearConsoleFully()
+    {
+        if (OperatingSystem.IsWindows())
+        {
+            // Clear screen and scrollback for Windows (best effort)
+            Console.Clear();
+
+            // ANSI support is required — available on modern Windows 10+ terminals
+            Console.Write("\x1b[3J"); // Clear scrollback buffer
+            Console.Write("\x1b[H");  // Move cursor to top-left
+            Console.Write("\x1b[2J"); // Clear screen again
+        }
+        else
+        {
+            // For Unix-like (macOS, Linux with ANSI support)
+            Console.Write("\x1b[3J"); // Clear scrollback buffer
+            Console.Write("\x1b[H");  // Move cursor to top-left
+            Console.Write("\x1b[2J"); // Clear screen
+        }
+    }
+
 }

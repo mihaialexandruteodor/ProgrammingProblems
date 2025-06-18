@@ -10,7 +10,10 @@ namespace PlayGround.problems.DSA
     // https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.linkedlist-1?view=net-8.0
     public class LinkedListExample : IBaseSolution
     {
-
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
         public void solve()
         {
             // Create the link list.

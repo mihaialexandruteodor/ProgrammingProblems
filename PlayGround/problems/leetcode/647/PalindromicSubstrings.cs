@@ -15,6 +15,11 @@ namespace problems.leetcode._647
             Console.WriteLine();
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         //https://leetcode.com/problems/palindromic-substrings/
 
         public void solve()

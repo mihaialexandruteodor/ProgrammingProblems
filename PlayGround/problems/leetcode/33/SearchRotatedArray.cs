@@ -14,6 +14,11 @@ namespace problems.leetcode._33
             Console.WriteLine();
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         // https://leetcode.com/problems/search-in-rotated-sorted-array/
         public void solve()
         {

@@ -6,38 +6,41 @@ namespace problems.leetcode._168
         public void solve()
         {
             printProblem();
-            Console.WriteLine(ConvertToTitle(52));
+            Solution solution = new Solution();
+            Console.WriteLine("Expected : AZ");
+            Console.WriteLine("Actual: " + solution.ConvertToTitle(52));
         }
 
-        public string solve(int val)
+        public void printSource()
         {
-            return ConvertToTitle(val);
+            SourcePrinter.PrintSource(this.GetType());
         }
-
-        public string ConvertToTitle(int columnNumber)
+        public class Solution
         {
-            string res = "";
-            bool remainder = false;
-
-            while (columnNumber > 0)
+            public string ConvertToTitle(int columnNumber)
             {
-                int currDigitBase26 = (columnNumber % 26) - 1;
-                columnNumber /= 26;
+                string res = "";
+                bool remainder = false;
 
-                if (currDigitBase26 == -1)
+                while (columnNumber > 0)
                 {
-                    currDigitBase26 = 25;
-                    columnNumber--;
+                    int currDigitBase26 = (columnNumber % 26) - 1;
+                    columnNumber /= 26;
+
+                    if (currDigitBase26 == -1)
+                    {
+                        currDigitBase26 = 25;
+                        columnNumber--;
+                    }
+
+                    char currentChar = (char)('A' + currDigitBase26);
+                    res = currentChar + res;
+
                 }
 
-                char currentChar = (char)('A' + currDigitBase26);
-                res = currentChar + res;
-
+                return res;
             }
-
-            return res;
         }
-
         public void printProblem()
         {
             Console.Write("Level: ");

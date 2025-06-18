@@ -14,6 +14,11 @@ namespace problems.leetcode._200
             Console.WriteLine();
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         // GRAPH PROBLEM
         // https://leetcode.com/problems/number-of-islands/
         public void solve()

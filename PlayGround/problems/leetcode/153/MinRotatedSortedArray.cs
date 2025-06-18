@@ -24,6 +24,10 @@ namespace problems.leetcode._153
             Console.WriteLine("Actual: " + solution.FindMin([4, 5, 6, 7, 0, 1, 2]));
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
         public class Solution
         {
             public int FindMin(int[] nums)

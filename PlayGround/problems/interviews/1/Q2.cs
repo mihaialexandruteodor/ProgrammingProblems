@@ -10,7 +10,10 @@ public class Q2 : IBaseSolution
         LoggerHandler(filename);
     }
 
-
+    public void printSource()
+    {
+        SourcePrinter.PrintSource(this.GetType());
+    }
     public void LoggerHandler(string filename)
     {
         string outfile = @"" + Directory.GetCurrentDirectory() + "\\out_hosts.txt";

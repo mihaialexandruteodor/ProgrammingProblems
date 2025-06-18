@@ -26,6 +26,10 @@ namespace problems.leetcode._787
         [2, 0, 100], [1, 3, 600], [2, 3, 200]], 0, 3, 1));
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
         public class Solution
         {
             public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int k)

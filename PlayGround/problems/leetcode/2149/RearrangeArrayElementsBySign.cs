@@ -6,50 +6,61 @@ namespace problems.leetcode._2149
         {
             printProblem();
             int[] nums = new int[] { -1, 1 };
-            var res = RearrangeArray(nums);
+            Solution solution = new Solution();
+            var res = solution.RearrangeArray(nums);
+            Console.WriteLine("Expected : 1 -1");
+            Console.Write("Actual: ");
             foreach (int item in res)
                 Console.Write(item + " ");
             Console.WriteLine();
         }
-        public int[] RearrangeArray(int[] nums)
+
+        public void printSource()
         {
-            int pos = 0, neg = 0, ind = 0;
-
-            while (nums[pos] < 0)
-                pos++;
-
-            while (nums[neg] >= 0)
-                neg++;
-
-            int[] res = new int[nums.Length];
-
-            while (ind < nums.Length)
-            {
-
-                //pos for positive number
-                if (ind % 2 == 0)
-                {
-                    res[ind] = nums[pos];
-                    pos++;
-                }
-                else //pos for negative number
-                {
-                    res[ind] = nums[neg];
-                    neg++;
-                }
-                while (pos < nums.Length && nums[pos] < 0)
-                    pos++;
-
-                while (neg < nums.Length && nums[neg] >= 0)
-                    neg++;
-
-                ind++;
-            }
-
-            return res;
-
+            SourcePrinter.PrintSource(this.GetType());
         }
 
+        public class Solution
+        {
+            public int[] RearrangeArray(int[] nums)
+            {
+                int pos = 0, neg = 0, ind = 0;
+
+                while (nums[pos] < 0)
+                    pos++;
+
+                while (nums[neg] >= 0)
+                    neg++;
+
+                int[] res = new int[nums.Length];
+
+                while (ind < nums.Length)
+                {
+
+                    //pos for positive number
+                    if (ind % 2 == 0)
+                    {
+                        res[ind] = nums[pos];
+                        pos++;
+                    }
+                    else //pos for negative number
+                    {
+                        res[ind] = nums[neg];
+                        neg++;
+                    }
+                    while (pos < nums.Length && nums[pos] < 0)
+                        pos++;
+
+                    while (neg < nums.Length && nums[neg] >= 0)
+                        neg++;
+
+                    ind++;
+                }
+
+                return res;
+
+            }
+        }
         public void printProblem()
         {
             Console.Write("Level: ");

@@ -1,6 +1,9 @@
 public class Q1 : IBaseSolution
 {
-
+    public void printSource()
+    {
+        SourcePrinter.PrintSource(this.GetType());
+    }
     public void solve()
     {
         int[] data = [7, 1, 5, 3, 6, 4];

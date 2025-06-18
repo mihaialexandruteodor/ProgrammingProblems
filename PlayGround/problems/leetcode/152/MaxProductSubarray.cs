@@ -23,6 +23,10 @@ namespace problems.leetcode._152
             Console.WriteLine("Actual: " + solution.MaxProduct([2, 3, -2, 4]));
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
         public class Solution
         {
             public int MaxProduct(int[] nums)

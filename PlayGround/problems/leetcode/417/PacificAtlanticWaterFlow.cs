@@ -15,6 +15,11 @@ namespace problems.leetcode._417
             Console.WriteLine();
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         // https://leetcode.com/problems/pacific-atlantic-water-flow/
         // 
         public void solve()

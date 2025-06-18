@@ -13,6 +13,11 @@ namespace problems.leetcode._648
             Console.WriteLine();
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         // https://leetcode.com/problems/replace-words/description/
         public void solve()
         {

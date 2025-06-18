@@ -26,6 +26,10 @@ namespace problems.leetcode._143
             PrintLinkedListAsArray(head2);
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
         public ListNode CreateLinkedList(int[] values)
         {
             if (values == null || values.Length == 0) return null;

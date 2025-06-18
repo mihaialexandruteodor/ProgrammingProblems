@@ -15,6 +15,11 @@ namespace problems.leetcode._39
             Console.WriteLine();
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         // BACKTRACK PROBLEM
         // https://leetcode.com/problems/combination-sum/
         public void solve()

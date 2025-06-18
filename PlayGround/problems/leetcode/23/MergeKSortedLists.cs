@@ -15,6 +15,11 @@ namespace problems.leetcode._23
             CreateLinkedList([1, 3, 4]), CreateLinkedList([2, 6])]));
         }
 
+        public void printSource()
+        {
+            SourcePrinter.PrintSource(this.GetType());
+        }
+
         public ListNode CreateLinkedList(int[] values)
         {
             if (values == null || values.Length == 0) return null;
