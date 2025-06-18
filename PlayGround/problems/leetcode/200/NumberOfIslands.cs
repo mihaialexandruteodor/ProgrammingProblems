@@ -20,13 +20,67 @@ namespace problems.leetcode._200
         {
             printProblem();
             Solution solution = new Solution();
-            Console.WriteLine("Expected : ");
-            Console.WriteLine("Actual: ");
+            Console.WriteLine("[[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\r\n\r\nExpected : 1");
+            Console.WriteLine("Actual: " + solution.NumIslands([['1', '1', '1', '1', '0'], ['1', '1', '0', '1', '0'], ['1', '1', '0', '0', '0'], ['0', '0', '0', '0', '0']]));
         }
 
         public class Solution
         {
+            public int NumIslands(char[][] grid)
+            {
+                HashSet<(int, int)> visited = new();
+                int rows = grid.Length;
+                int cols = grid[0].Length;
+                int count = 0;
+                List<(int r, int c)> getNeighbors(int row, int col)
+                {
+                    List<(int r, int c)> neighbors = new();
+                    (int r, int c)[] directions = [(0, 1), (1, 0), (0, -1), (-1, 0)];
+                    foreach (var d in directions)
+                    {
+                        int newRow = row + d.r;
+                        int newCol = col + d.c;
+                        if (0 <= newRow &&
+                            newRow < rows &&
+                            0 <= newCol &&
+                            newCol < cols &&
+                            grid[newRow][newCol] == '1'
+                        )
+                        {
+                            neighbors.Add((newRow, newCol));
+                        }
+                    }
 
+                    return neighbors;
+                }
+
+
+                void dfs(int row, int col)
+                {
+                    visited.Add((row, col));
+                    var neighbors = getNeighbors(row, col);
+                    foreach (var neighbor in neighbors)
+                    {
+                        if (visited.Contains(neighbor))
+                            continue;
+                        dfs(neighbor.r, neighbor.c);
+                    }
+                }
+
+                for (int r = 0; r < rows; r++)
+                {
+                    for (int c = 0; c < cols; c++)
+                    {
+                        if (grid[r][c] == '1' && !visited.Contains((r, c)))
+                        {
+                            count++;
+                            dfs(r, c);
+                        }
+                    }
+                }
+
+                return count;
+            }
         }
     }
 }
