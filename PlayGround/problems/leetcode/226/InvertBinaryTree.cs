@@ -8,6 +8,7 @@ namespace problems.leetcode._226
         // 
         public void solve()
         {
+            printProblem();
             Solution solution = new Solution();
             Console.WriteLine("Expected : ");
             Console.WriteLine("Actual: ");
