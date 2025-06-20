@@ -8,4 +8,11 @@ public interface IBaseSolution {
     {
         throw new NotImplementedException();
     }
+
+    enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard
+    }
 }
