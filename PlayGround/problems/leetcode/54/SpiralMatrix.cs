@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._54
 {
     public class SpiralMatrix : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Matrix;
         // https://leetcode.com/problems/spiral-matrix/
         public void solve()
         {

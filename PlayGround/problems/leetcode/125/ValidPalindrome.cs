@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._125
 {
     public class ValidPalindrome : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.String;
         // https://leetcode.com/problems/valid-palindrome/
         public void solve()
         {

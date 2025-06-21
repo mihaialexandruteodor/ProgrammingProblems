@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._141
 {
     public class LinkedListCycle : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.LinkedList;
         // https://leetcode.com/problems/linked-list-cycle/
         public void solve()
         {

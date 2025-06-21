@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._190
 {
     public class ReverseBits : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.Binary;
         // https://leetcode.com/problems/reverse-bits/
         public void solve()
         {

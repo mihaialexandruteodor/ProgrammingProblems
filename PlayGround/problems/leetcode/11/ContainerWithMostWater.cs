@@ -1,10 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._11
 {
     public class ContainerWithMostWater : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Arrays;
+
         // https://leetcode.com/problems/container-with-most-water/
         public void solve()
         {

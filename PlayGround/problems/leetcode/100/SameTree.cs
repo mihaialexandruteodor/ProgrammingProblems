@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 using static problems.leetcode._104.MaxDepthBinaryTree;
 
 namespace problems.leetcode._100
 {
     public class SameTree : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.Tree;
         // https://leetcode.com/problems/same-tree/
         public void solve()
         {

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._1
 {
     public class TwoSum : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.Arrays;
+
         // https://leetcode.com/problems/two-sum/
         public void solve()
         {

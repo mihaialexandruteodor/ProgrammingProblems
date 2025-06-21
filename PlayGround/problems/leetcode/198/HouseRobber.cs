@@ -1,8 +1,12 @@
-﻿namespace problems.leetcode._198
+﻿using static IBaseSolution;
+
+namespace problems.leetcode._198
 {
     public class HouseRobber : IBaseSolution
     {
-
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.DynamicProgramming;
+        // https://leetcode.com/problems/house-robber/
         public void solve()
         {
             printProblem();

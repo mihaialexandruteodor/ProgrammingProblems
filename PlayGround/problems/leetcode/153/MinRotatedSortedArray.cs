@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._153
 {
     public class MinRotatedSortedArray : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Arrays;
         public void printProblem()
         {
             Console.Write("Level: ");

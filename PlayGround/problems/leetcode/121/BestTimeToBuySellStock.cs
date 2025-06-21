@@ -1,8 +1,13 @@
-﻿namespace problems.leetcode._121
+﻿using static IBaseSolution;
+
+namespace problems.leetcode._121
 {
     public class BestTimeToBuySellStock : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.Arrays;
 
+        // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
         public void solve()
         {
             printProblem();

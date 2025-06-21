@@ -1,11 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text;
+using static IBaseSolution;
 
 namespace problems.leetcode._15
 {
     public class ThreeSum : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Arrays;
+
         // https://leetcode.com/problems/3sum/
         public void solve()
         {

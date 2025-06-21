@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text;
+using static IBaseSolution;
 
 namespace problems.leetcode._56
 {
     public class MergeIntervals : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Interval;
         // https://leetcode.com/problems/merge-intervals/
         public void solve()
         {

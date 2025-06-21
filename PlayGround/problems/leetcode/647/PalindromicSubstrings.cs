@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using static IBaseSolution;
 
 namespace problems.leetcode._647
 {
     public class PalindromicSubstrings : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.String;
+
+        //https://leetcode.com/problems/palindromic-substrings/
         public void printProblem()
         {
             Console.Write("Level: ");
@@ -19,9 +24,6 @@ namespace problems.leetcode._647
         {
             SourcePrinter.PrintSource(this.GetType());
         }
-
-        //https://leetcode.com/problems/palindromic-substrings/
-
         public void solve()
         {
             printProblem();

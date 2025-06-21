@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._21
 {
     public class MergeTwoSortedLists : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.LinkedList;
         // https://leetcode.com/problems/merge-two-sorted-lists/
         public void solve()
         {

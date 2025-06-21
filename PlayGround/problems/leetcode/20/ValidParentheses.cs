@@ -1,7 +1,12 @@
-﻿namespace problems.leetcode._20
+﻿using static IBaseSolution;
+
+namespace problems.leetcode._20
 {
     public class ValidParentheses : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.String;
+        // https://leetcode.com/problems/valid-parentheses/
         public void printProblem()
         {
             Console.Write("Level: ");
@@ -16,7 +21,6 @@
             SourcePrinter.PrintSource(this.GetType());
         }
 
-        // https://leetcode.com/problems/valid-parentheses/
         // STACK PROBLEM
         public void solve()
         {

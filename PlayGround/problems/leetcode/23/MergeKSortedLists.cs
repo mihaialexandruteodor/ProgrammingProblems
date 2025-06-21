@@ -1,9 +1,12 @@
 ﻿using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._23
 {
     public class MergeKSortedLists : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Hard;
+        public static readonly Topic topic = Topic.LinkedList;
         // https://leetcode.com/problems/merge-k-sorted-lists/
         public void solve()
         {

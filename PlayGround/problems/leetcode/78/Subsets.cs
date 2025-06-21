@@ -1,11 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Text;
+using static IBaseSolution;
 
 namespace problems.leetcode._78
 {
     public class Subsets : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.DynamicProgramming;
         // https://leetcode.com/problems/subsets/
         // BACKTRACKING
         public void solve()

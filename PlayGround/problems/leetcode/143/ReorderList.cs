@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel;
+using static IBaseSolution;
 using static PlayGround.problems.DSA.IntersectionOfTwoLinkedLists;
 
 namespace problems.leetcode._143
 {
     public class ReorderList : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.LinkedList;
         // https://leetcode.com/problems/reorder-list/
         public void solve()
         {

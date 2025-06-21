@@ -1,7 +1,12 @@
+using static IBaseSolution;
+
 namespace problems.leetcode._2149
 {
     public class RearrangeArrayElementsBySign : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Arrays;
+        // https://leetcode.com/problems/rearrange-array-elements-by-sign/
         public void solve()
         {
             printProblem();

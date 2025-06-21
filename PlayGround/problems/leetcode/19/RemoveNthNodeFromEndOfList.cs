@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._19
 {
     public class RemoveNthNodeFromEndOfList : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.LinkedList;
         // https://leetcode.com/problems/remove-nth-node-from-end-of-list/
         public void solve()
         {

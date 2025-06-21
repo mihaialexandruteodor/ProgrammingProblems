@@ -1,8 +1,13 @@
-﻿namespace problems.leetcode._207
+﻿using static IBaseSolution;
+
+namespace problems.leetcode._207
 {
     public class CourseSchedule : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Graphs;
 
+        // https://leetcode.com/problems/course-schedule/
         public void solve()
         {
             printProblem();

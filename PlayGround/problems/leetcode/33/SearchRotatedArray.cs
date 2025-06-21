@@ -1,9 +1,14 @@
 ﻿using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._33
 {
     public class SearchRotatedArray : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Arrays;
+
+        // https://leetcode.com/problems/search-in-rotated-sorted-array/
         public void printProblem()
         {
             Console.Write("Level: ");
@@ -19,7 +24,6 @@ namespace problems.leetcode._33
             SourcePrinter.PrintSource(this.GetType());
         }
 
-        // https://leetcode.com/problems/search-in-rotated-sorted-array/
         public void solve()
         {
             printProblem();

@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using static IBaseSolution;
 
 namespace problems.leetcode._133
 {
     public class CloneGraphDeepCopy : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Graphs;
+
         //https://leetcode.com/problems/clone-graph/
         //O(n), n = edges + vertices
         // Definition for a Node.

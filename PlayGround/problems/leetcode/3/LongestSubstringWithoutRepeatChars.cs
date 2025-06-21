@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._3
 {
     public class LongestSubstringWithoutRepeatChars : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.String;
         // https://leetcode.com/problems/longest-substring-without-repeating-characters/
         public void solve()
         {

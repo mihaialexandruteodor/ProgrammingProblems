@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._226
 {
     public class InvertBinaryTree : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.Tree;
         // https://leetcode.com/problems/invert-binary-tree/
         public void solve()
         {

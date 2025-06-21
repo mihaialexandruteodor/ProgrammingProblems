@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._238
 {
     public class ProdOfArrayExceptSelf : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Arrays;
         // https://leetcode.com/problems/product-of-array-except-self/
         public void solve()
         {

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._128
 {
     public class LongestConsecutiveSequence : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Graphs;
         // https://leetcode.com/problems/longest-consecutive-sequence/
         public void solve()
         {

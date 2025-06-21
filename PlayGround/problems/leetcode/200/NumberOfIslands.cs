@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._200
 {
     public class NumberOfIslands : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Graphs;
+        // https://leetcode.com/problems/number-of-islands/
         public void printProblem()
         {
             Console.Write("Level: ");
@@ -20,7 +24,7 @@ namespace problems.leetcode._200
         }
 
         // GRAPH PROBLEM
-        // https://leetcode.com/problems/number-of-islands/
+
         public void solve()
         {
             printProblem();

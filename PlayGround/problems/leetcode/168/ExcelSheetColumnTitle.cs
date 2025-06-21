@@ -1,8 +1,12 @@
+using static IBaseSolution;
+
 namespace problems.leetcode._168
 {
     public class ExcelSheetColumnTitle : IBaseSolution
     {
-
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.String;
+        // https://leetcode.com/problems/excel-sheet-column-title/
         public void solve()
         {
             printProblem();

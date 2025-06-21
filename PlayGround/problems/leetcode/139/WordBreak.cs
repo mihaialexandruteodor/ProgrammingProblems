@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using static IBaseSolution;
 
 namespace problems.leetcode._139
 {
-    // https://leetcode.com/problems/word-break/
-    // DYNAMIC PROGRAMMING
-    // https://www.youtube.com/watch?v=Sx9NNgInc3A
     public class WordBreak : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.DynamicProgramming;
+
+        // https://leetcode.com/problems/word-break/
+        // DYNAMIC PROGRAMMING
+        // https://www.youtube.com/watch?v=Sx9NNgInc3A
         public void printProblem()
         {
             Console.Write("Level: ");

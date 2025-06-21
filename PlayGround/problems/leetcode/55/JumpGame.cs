@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._55
 {
     public class JumpGame : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.DynamicProgramming;
         // https://leetcode.com/problems/jump-game/
         public void solve()
         {

@@ -1,8 +1,13 @@
 ﻿using PlayGround.problems.DSA;
+using static IBaseSolution;
 namespace problems.leetcode._648
 {
     public class ReplaceWords : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.String;
+
+        // https://leetcode.com/problems/replace-words/description/
         public void printProblem()
         {
             Console.Write("Level: ");
@@ -17,8 +22,6 @@ namespace problems.leetcode._648
         {
             SourcePrinter.PrintSource(this.GetType());
         }
-
-        // https://leetcode.com/problems/replace-words/description/
         public void solve()
         {
             printProblem();

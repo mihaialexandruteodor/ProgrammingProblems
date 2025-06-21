@@ -1,10 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using static IBaseSolution;
 
 namespace problems.leetcode._572
 {
     public class SubtreeOfAnotherTree : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Easy;
+        public static readonly Topic topic = Topic.Tree;
         // https://leetcode.com/problems/subtree-of-another-tree/
         public void solve()
         {

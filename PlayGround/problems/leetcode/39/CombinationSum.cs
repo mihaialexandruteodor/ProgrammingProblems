@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Text;
+using static IBaseSolution;
 
 namespace problems.leetcode._39
 {
     public class CombinationSum : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.DynamicProgramming;
+        // https://leetcode.com/problems/combination-sum/
         public void printProblem()
         {
             Console.Write("Level: ");
@@ -21,7 +25,6 @@ namespace problems.leetcode._39
         }
 
         // BACKTRACK PROBLEM
-        // https://leetcode.com/problems/combination-sum/
         public void solve()
         {
             printProblem();

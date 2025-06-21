@@ -1,10 +1,14 @@
 ﻿using System.ComponentModel;
 using System.Text;
+using static IBaseSolution;
 
 namespace problems.leetcode._417
 {
     public class PacificAtlanticWaterFlow : IBaseSolution
     {
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.Graphs;
+        // https://leetcode.com/problems/pacific-atlantic-water-flow/
         public void printProblem()
         {
             Console.Write("Level: ");
@@ -20,8 +24,6 @@ namespace problems.leetcode._417
             SourcePrinter.PrintSource(this.GetType());
         }
 
-        // https://leetcode.com/problems/pacific-atlantic-water-flow/
-        // 
         public void solve()
         {
             printProblem();

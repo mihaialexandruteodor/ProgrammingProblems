@@ -15,4 +15,17 @@ public interface IBaseSolution {
         Medium,
         Hard
     }
+    enum Topic
+    {
+        Arrays,
+        Binary,
+        DynamicProgramming,
+        Graphs,
+        Interval,
+        LinkedList,
+        Matrix,
+        String,
+        Tree,
+        Heap
+    }
 }
