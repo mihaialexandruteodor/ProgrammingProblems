@@ -11,7 +11,7 @@ namespace problems.leetcode._1
             printProblem();
             Solution solution = new Solution();
             Console.WriteLine("[2,7,11,15], t=9, Expected : [0,1]");
-            Console.WriteLine("Actual: " + "[" + string.Join(",", solution.TwoSum([2, 7, 11, 15], 9)) + "]");
+            Console.WriteLine("Actual: [" + string.Join(",", solution.TwoSum([2, 7, 11, 15], 9)) + "]");
         }
 
         public class Solution
