@@ -9,10 +9,11 @@ namespace problems.leetcode._56
     {
         public static readonly Difficulty difficulty = Difficulty.Medium;
         public static readonly Topic topic = Topic.Interval;
+        public static readonly string description = "Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: intervals = [[1,3],[2,6],[8,10],[15,18]]\r\nOutput: [[1,6],[8,10],[15,18]]\r\nExplanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].\r\nExample 2:\r\n\r\nInput: intervals = [[1,4],[4,5]]\r\nOutput: [[1,5]]\r\nExplanation: Intervals [1,4] and [4,5] are considered overlapping.\r\n \r\n\r\nConstraints:\r\n\r\n1 <= intervals.length <= 104\r\nintervals[i].length == 2\r\n0 <= starti <= endi <= 104";
         // https://leetcode.com/problems/merge-intervals/
         public void solve()
         {
-            printProblem();
+            Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[[1,3],[2,6],[8,10],[15,18]], Expected : [[1,6],[8,10],[15,18]]");
             Console.Write("Actual: ");
@@ -65,16 +66,6 @@ namespace problems.leetcode._56
 
                 return newIntervals.ToArray();
             }
-        }
-
-        public void printProblem()
-        {
-            Console.Write("Level: ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("MEDIUM");
-            Console.ResetColor();
-            Console.WriteLine("Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: intervals = [[1,3],[2,6],[8,10],[15,18]]\r\nOutput: [[1,6],[8,10],[15,18]]\r\nExplanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].\r\nExample 2:\r\n\r\nInput: intervals = [[1,4],[4,5]]\r\nOutput: [[1,5]]\r\nExplanation: Intervals [1,4] and [4,5] are considered overlapping.\r\n \r\n\r\nConstraints:\r\n\r\n1 <= intervals.length <= 104\r\nintervals[i].length == 2\r\n0 <= starti <= endi <= 104");
-            Console.WriteLine();
         }
 
         public void printSource()

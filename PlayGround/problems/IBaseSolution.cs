@@ -1,6 +1,6 @@
-public interface IBaseSolution {
+public interface IBaseSolution
+{
 
-    public void printProblem();
     public void solve();
 
     void printSource();

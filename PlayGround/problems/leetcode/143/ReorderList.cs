@@ -8,10 +8,11 @@ namespace problems.leetcode._143
     {
         public static readonly Difficulty difficulty = Difficulty.Medium;
         public static readonly Topic topic = Topic.LinkedList;
+        public static readonly string description = "Problem: You are given the head of a singly linked-list. The list can be represented as:\r\n\r\nL0 → L1 → … → Ln - 1 → Ln\r\nReorder the list to be on the following form:\r\n\r\nL0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …\r\nYou may not modify the values in the list's nodes. Only nodes themselves may be changed.\r\n\r\n \r\n\r\nExample 1:Input: head = [1,2,3,4]\r\nOutput: [1,4,2,3]\r\nInput: head = [1,2,3,4,5]\r\nOutput: [1,5,2,4,3]\r\n \r\n\r\nConstraints:\r\n\r\nThe number of nodes in the list is in the range [1, 5 * 104].\r\n1 <= Node.val <= 1000";
         // https://leetcode.com/problems/reorder-list/
         public void solve()
         {
-            printProblem();
+            Utils.Instance.PrintProblem(description, difficulty, topic);
 
             Solution solution = new Solution();
             Console.WriteLine("[1,2,3,4], Expected : [1,4,2,3]");
@@ -59,16 +60,6 @@ namespace problems.leetcode._143
             }
             string result = "[" + string.Join(",", values) + "]";
             Console.WriteLine(result);
-        }
-
-        public void printProblem()
-        {
-            Console.Write("Level: ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("MEDIUM");
-            Console.ResetColor();
-            Console.WriteLine("Problem: You are given the head of a singly linked-list. The list can be represented as:\r\n\r\nL0 → L1 → … → Ln - 1 → Ln\r\nReorder the list to be on the following form:\r\n\r\nL0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …\r\nYou may not modify the values in the list's nodes. Only nodes themselves may be changed.\r\n\r\n \r\n\r\nExample 1:Input: head = [1,2,3,4]\r\nOutput: [1,4,2,3]\r\nInput: head = [1,2,3,4,5]\r\nOutput: [1,5,2,4,3]\r\n \r\n\r\nConstraints:\r\n\r\nThe number of nodes in the list is in the range [1, 5 * 104].\r\n1 <= Node.val <= 1000");
-            Console.WriteLine();
         }
 
         /**

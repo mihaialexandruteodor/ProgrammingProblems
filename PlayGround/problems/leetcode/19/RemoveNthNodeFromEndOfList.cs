@@ -8,10 +8,11 @@ namespace problems.leetcode._19
     {
         public static readonly Difficulty difficulty = Difficulty.Medium;
         public static readonly Topic topic = Topic.LinkedList;
+        public static readonly string description = "Given the head of a linked list, remove the nth node from the end of the list and return its head.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: head = [1,2,3,4,5], n = 2\r\nOutput: [1,2,3,5]\r\nExample 2:\r\n\r\nInput: head = [1], n = 1\r\nOutput: []\r\nExample 3:\r\n\r\nInput: head = [1,2], n = 1\r\nOutput: [1]\r\n \r\n\r\nConstraints:\r\n\r\nThe number of nodes in the list is sz.\r\n1 <= sz <= 30\r\n0 <= Node.val <= 100\r\n1 <= n <= sz\r\n \r\n\r\nFollow up: Could you do this in one pass?";
         // https://leetcode.com/problems/remove-nth-node-from-end-of-list/
         public void solve()
         {
-            printProblem();
+            Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[1,2,3,4,5], n=2, Expected : [1,2,3,5]");
             Console.Write("Actual: ");
@@ -81,16 +82,6 @@ namespace problems.leetcode._19
                 return head;
 
             }
-        }
-
-        public void printProblem()
-        {
-            Console.Write("Level: ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("MEDIUM");
-            Console.ResetColor();
-            Console.WriteLine("Given the head of a linked list, remove the nth node from the end of the list and return its head.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: head = [1,2,3,4,5], n = 2\r\nOutput: [1,2,3,5]\r\nExample 2:\r\n\r\nInput: head = [1], n = 1\r\nOutput: []\r\nExample 3:\r\n\r\nInput: head = [1,2], n = 1\r\nOutput: [1]\r\n \r\n\r\nConstraints:\r\n\r\nThe number of nodes in the list is sz.\r\n1 <= sz <= 30\r\n0 <= Node.val <= 100\r\n1 <= n <= sz\r\n \r\n\r\nFollow up: Could you do this in one pass?");
-            Console.WriteLine();
         }
 
         public void printSource()

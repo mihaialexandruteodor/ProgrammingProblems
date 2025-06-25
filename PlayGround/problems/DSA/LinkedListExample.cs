@@ -190,9 +190,5 @@ namespace PlayGround.problems.DSA
             return prev; // new head of the reversed list
         }
 
-        public void printProblem()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

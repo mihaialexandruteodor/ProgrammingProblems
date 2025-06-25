@@ -9,11 +9,12 @@ namespace problems.leetcode._78
     {
         public static readonly Difficulty difficulty = Difficulty.Medium;
         public static readonly Topic topic = Topic.DynamicProgramming;
+        public static readonly string description = "Given an integer array nums of unique elements, return all possible subsets (the power set).\r\n\r\nThe solution set must not contain duplicate subsets. Return the solution in any order.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: nums = [1,2,3]\r\nOutput: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]\r\nExample 2:\r\n\r\nInput: nums = [0]\r\nOutput: [[],[0]]\r\n \r\n\r\nConstraints:\r\n\r\n1 <= nums.length <= 10\r\n-10 <= nums[i] <= 10\r\nAll the numbers of nums are unique.";
         // https://leetcode.com/problems/subsets/
         // BACKTRACKING
         public void solve()
         {
-            printProblem();
+            Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[1,2,3], Expected : [[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]]");
             Console.Write("Actual: " + FormatListOfLists(solution.Subsets([1, 2, 3])));
@@ -60,17 +61,6 @@ namespace problems.leetcode._78
 
                 return res;
             }
-        }
-
-
-        public void printProblem()
-        {
-            Console.Write("Level: ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("MEDIUM");
-            Console.ResetColor();
-            Console.WriteLine("Given an integer array nums of unique elements, return all possible subsets (the power set).\r\n\r\nThe solution set must not contain duplicate subsets. Return the solution in any order.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: nums = [1,2,3]\r\nOutput: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]\r\nExample 2:\r\n\r\nInput: nums = [0]\r\nOutput: [[],[0]]\r\n \r\n\r\nConstraints:\r\n\r\n1 <= nums.length <= 10\r\n-10 <= nums[i] <= 10\r\nAll the numbers of nums are unique.");
-            Console.WriteLine();
         }
 
         public void printSource()

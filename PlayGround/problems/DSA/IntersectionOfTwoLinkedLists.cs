@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static IBaseSolution;
 
 namespace PlayGround.problems.DSA
 {
@@ -18,11 +19,9 @@ namespace PlayGround.problems.DSA
      */
     public class IntersectionOfTwoLinkedLists : IBaseSolution
     {
-        public void printProblem()
-        {
-            Console.WriteLine("Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.");
-            Console.WriteLine();
-        }
+        public static readonly Difficulty difficulty = Difficulty.Medium;
+        public static readonly Topic topic = Topic.LinkedList;
+        public static readonly string description = "";
 
         public void printSource()
         {
@@ -31,7 +30,7 @@ namespace PlayGround.problems.DSA
 
         public void solve()
         {
-            printProblem();
+            Utils.Instance.PrintProblem(description, difficulty, topic);
             // to do
         }
 

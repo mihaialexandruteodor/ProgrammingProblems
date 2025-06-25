@@ -8,10 +8,11 @@ namespace problems.leetcode._3
     {
         public static readonly Difficulty difficulty = Difficulty.Medium;
         public static readonly Topic topic = Topic.String;
+        public static readonly string description = "Given a string s, find the length of the longest substring without duplicate characters.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: s = \"abcabcbb\"\r\nOutput: 3\r\nExplanation: The answer is \"abc\", with the length of 3.\r\nExample 2:\r\n\r\nInput: s = \"bbbbb\"\r\nOutput: 1\r\nExplanation: The answer is \"b\", with the length of 1.\r\nExample 3:\r\n\r\nInput: s = \"pwwkew\"\r\nOutput: 3\r\nExplanation: The answer is \"wke\", with the length of 3.\r\nNotice that the answer must be a substring, \"pwke\" is a subsequence and not a substring.\r\n \r\n\r\nConstraints:\r\n\r\n0 <= s.length <= 5 * 104\r\ns consists of English letters, digits, symbols and spaces.";
         // https://leetcode.com/problems/longest-substring-without-repeating-characters/
         public void solve()
         {
-            printProblem();
+            Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("\"abcabcbb\", Expected : 3");
             Console.WriteLine("Actual: " + solution.LengthOfLongestSubstring("abcabcbb"));
@@ -98,16 +99,6 @@ namespace problems.leetcode._3
 
                 return LengthOfLongestSubstringSubfunction(s);
             }
-        }
-
-        public void printProblem()
-        {
-            Console.Write("Level: ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("MEDIUM");
-            Console.ResetColor();
-            Console.WriteLine("Given a string s, find the length of the longest substring without duplicate characters.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: s = \"abcabcbb\"\r\nOutput: 3\r\nExplanation: The answer is \"abc\", with the length of 3.\r\nExample 2:\r\n\r\nInput: s = \"bbbbb\"\r\nOutput: 1\r\nExplanation: The answer is \"b\", with the length of 1.\r\nExample 3:\r\n\r\nInput: s = \"pwwkew\"\r\nOutput: 3\r\nExplanation: The answer is \"wke\", with the length of 3.\r\nNotice that the answer must be a substring, \"pwke\" is a subsequence and not a substring.\r\n \r\n\r\nConstraints:\r\n\r\n0 <= s.length <= 5 * 104\r\ns consists of English letters, digits, symbols and spaces.");
-            Console.WriteLine();
         }
 
         public void printSource()

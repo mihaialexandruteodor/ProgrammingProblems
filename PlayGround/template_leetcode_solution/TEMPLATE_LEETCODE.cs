@@ -10,9 +10,11 @@ namespace problems.leetcode._   //add the problem number here, ex: problems.leet
         // set acordingly, will be used on the selector screen
         public static readonly Difficulty difficulty = Difficulty.Medium;
         public static readonly Topic topic = Topic.String;
+        public static readonly string description = "";
         // 
         public void solve()
         {
+            Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("Expected : ");
             //you can call the Solution class here, ex: Console.WriteLine("Actual: " + solution.IsSubtree(BuildTree([3, 4, 5, 1, 2]), BuildTree([4, 1, 2])));
@@ -23,17 +25,6 @@ namespace problems.leetcode._   //add the problem number here, ex: problems.leet
         public class Solution
         {
             // code here
-        }
-
-        public void printProblem()
-        {
-            Console.Write("Level: ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("MEDIUM");
-            Console.ResetColor();
-            //paste the problem description here
-            Console.WriteLine("");
-            Console.WriteLine();
         }
 
         // this will print the Solution class as text

@@ -74,9 +74,4 @@ public class Q1 : IBaseSolution
 
         return 0;
     }
-
-    public void printProblem()
-    {
-        throw new NotImplementedException();
-    }
 }
