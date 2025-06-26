@@ -22,7 +22,43 @@ namespace problems.leetcode._3592
         {
             public IList<int> FindCoins(int[] numWays)
             {
-                return null;
+                int n = numWays.Length;
+                int[] dp = new int[n + 1];
+                dp[0] = 1;
+                List<int> result = new();
+
+                for (int i = 1; i <= n; i++)
+                {
+                    if (dp[i] == numWays[i - 1])
+                        continue;
+
+                    if (dp[i] > numWays[i - 1])
+                        return new List<int>();
+
+                    // Try adding coin of value i
+                    result.Add(i);
+
+                    // Recompute dp from scratch
+                    Array.Fill(dp, 0);
+                    dp[0] = 1;
+
+                    foreach (int coin in result)
+                    {
+                        for (int j = coin; j <= n; j++)
+                        {
+                            dp[j] += dp[j - coin];
+                        }
+                    }
+
+                    // Check consistency so far
+                    for (int k = 1; k <= i; k++)
+                    {
+                        if (dp[k] != numWays[k - 1])
+                            return new List<int>();
+                    }
+                }
+
+                return result;
             }
         }
 
