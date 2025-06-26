@@ -15,12 +15,11 @@ namespace problems.leetcode._54
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[[1,2,3],[4,5,6],[7,8,9]], Expected : [1,2,3,6,9,8,7,4,5]");
-            Console.WriteLine("Actual: [" + string.Join(",", solution.SpiralOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]])) + "]");
+            Console.WriteLine("Actual: " + Utils.PrintForConsole(solution.SpiralOrder([[1, 2, 3], [4, 5, 6], [7, 8, 9]])));
         }
 
         public class Solution
         {
-
             enum Direction
             {
                 Up,

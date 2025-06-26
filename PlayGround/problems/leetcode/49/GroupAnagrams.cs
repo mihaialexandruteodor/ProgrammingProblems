@@ -15,8 +15,7 @@ namespace problems.leetcode._49
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[\"eat\",\"tea\",\"tan\",\"ate\",\"nat\",\"bat\"], Expected : [[\"bat\"],[\"nat\",\"tan\"],[\"ate\",\"eat\",\"tea\"]]");
-            Console.WriteLine("Actual: [" + string.Join(",", solution.GroupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]).Select(inner =>
-    "[" + string.Join(",", inner.Select(s => $"\"{s}\"")) + "]")) + "]");
+            Console.WriteLine("Actual: " + Utils.PrintForConsole(solution.GroupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"])));
         }
 
         public class Solution

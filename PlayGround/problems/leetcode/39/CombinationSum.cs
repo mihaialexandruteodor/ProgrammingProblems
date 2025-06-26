@@ -22,26 +22,7 @@ namespace problems.leetcode._39
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("candidates = [2,3,5], target = 8, Expected : [[2,2,2,2],[2,3,3],[3,5]]");
-            Console.Write("Actual: " + FormatListOfLists(solution.CombinationSum([2, 3, 5], 8)));
-        }
-
-        static string FormatListOfLists(IList<IList<int>> list)
-        {
-            var sb = new StringBuilder();
-            sb.Append("[");
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                sb.Append("[");
-                sb.Append(string.Join(",", list[i]));
-                sb.Append("]");
-
-                if (i < list.Count - 1)
-                    sb.Append(",");
-            }
-
-            sb.Append("]");
-            return sb.ToString();
+            Console.Write("Actual: " + Utils.PrintForConsole(solution.CombinationSum([2, 3, 5], 8)));
         }
 
         public class Solution

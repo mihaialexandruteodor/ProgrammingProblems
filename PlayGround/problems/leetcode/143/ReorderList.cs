@@ -58,7 +58,7 @@ namespace problems.leetcode._143
                 values.Add(head.val);
                 head = head.next;
             }
-            string result = "[" + string.Join(",", values) + "]";
+            string result = Utils.PrintForConsole(values);
             Console.WriteLine(result);
         }
 

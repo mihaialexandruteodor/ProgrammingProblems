@@ -15,8 +15,7 @@ namespace problems.leetcode._206
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[1,2,3,4,5], Expected : [5,4,3,2,1]");
-            Console.Write("Actual: ");
-            PrintLinkedListAsArray(solution.ReverseList(CreateLinkedList([1, 2, 3, 4, 5])));
+            Console.Write("Actual: " + Utils.PrintForConsole(solution.ReverseList(Utils.CreateLinkedList([1, 2, 3, 4, 5]))));
         }
         public class Solution
         {
@@ -35,46 +34,6 @@ namespace problems.leetcode._206
 
                 return prev; // new head of the reversed list
             }
-        }
-
-        public class ListNode
-        {
-            public int val;
-            public ListNode next;
-            public ListNode(int x)
-            {
-                val = x;
-                next = null;
-            }
-        }
-
-        public ListNode CreateLinkedList(int[] values)
-        {
-            if (values == null || values.Length == 0) return null;
-
-            ListNode head = new ListNode(values[0]);
-            ListNode current = head;
-
-
-            for (int i = 1; i < values.Length; i++)
-            {
-                current.next = new ListNode(values[i]);
-                current = current.next;
-            }
-
-            return head;
-        }
-
-        public void PrintLinkedListAsArray(ListNode head)
-        {
-            List<int> values = new List<int>();
-            while (head != null)
-            {
-                values.Add(head.val);
-                head = head.next;
-            }
-            string result = "[" + string.Join(",", values) + "]";
-            Console.WriteLine(result);
         }
 
         public void printSource()

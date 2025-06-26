@@ -15,7 +15,7 @@ namespace problems.leetcode._238
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[1,2,3,4], Expected : [24,12,8,6]");
-            Console.WriteLine("Actual: [" + string.Join(",", solution.ProductExceptSelf([1, 2, 3, 4])) + "]");
+            Console.WriteLine("Actual: " + Utils.PrintForConsole(solution.ProductExceptSelf([1, 2, 3, 4])));
         }
 
         public class Solution

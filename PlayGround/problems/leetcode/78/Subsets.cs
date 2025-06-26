@@ -17,27 +17,9 @@ namespace problems.leetcode._78
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[1,2,3], Expected : [[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]]");
-            Console.Write("Actual: " + FormatListOfLists(solution.Subsets([1, 2, 3])));
+            Console.Write("Actual: " + Utils.PrintForConsole(solution.Subsets([1, 2, 3])));
         }
 
-        static string FormatListOfLists(IList<IList<int>> list)
-        {
-            var sb = new StringBuilder();
-            sb.Append("[");
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                sb.Append("[");
-                sb.Append(string.Join(",", list[i]));
-                sb.Append("]");
-
-                if (i < list.Count - 1)
-                    sb.Append(",");
-            }
-
-            sb.Append("]");
-            return sb.ToString();
-        }
 
         public class Solution
         {

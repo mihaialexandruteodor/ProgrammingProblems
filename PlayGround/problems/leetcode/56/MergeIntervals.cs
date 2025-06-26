@@ -16,28 +16,8 @@ namespace problems.leetcode._56
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[[1,3],[2,6],[8,10],[15,18]], Expected : [[1,6],[8,10],[15,18]]");
-            Console.Write("Actual: ");
-            PrintListOfLists(solution.Merge([[1, 3], [2, 6], [8, 10], [15, 18]]));
+            Console.Write("Actual: " + Utils.PrintForConsole(solution.Merge([[1, 3], [2, 6], [8, 10], [15, 18]])));
         }
-
-        static void PrintListOfLists(IList<IList<int>> list)
-        {
-            var sb = new StringBuilder();
-            sb.Append("[");
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                sb.Append("[");
-                sb.Append(string.Join(",", list[i]));
-                sb.Append("]");
-                if (i < list.Count - 1)
-                    sb.Append(",");
-            }
-
-            sb.Append("]");
-            Console.WriteLine(sb.ToString());
-        }
-
         public class Solution
         {
             public int[][] Merge(int[][] intervals)

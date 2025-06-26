@@ -21,26 +21,7 @@ namespace problems.leetcode._417
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[[1,2,2,3,5],[3,2,3,4,4],[2,4,5,3,1],[6,7,1,4,5],[5,1,1,2,4]], Expected : [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]");
-            Console.Write("Actual: ");
-            PrintListOfLists(solution.PacificAtlantic([[1, 2, 2, 3, 5], [3, 2, 3, 4, 4], [2, 4, 5, 3, 1], [6, 7, 1, 4, 5], [5, 1, 1, 2, 4]]));
-        }
-
-        static void PrintListOfLists(IList<IList<int>> list)
-        {
-            var sb = new StringBuilder();
-            sb.Append("[");
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                sb.Append("[");
-                sb.Append(string.Join(",", list[i]));
-                sb.Append("]");
-                if (i < list.Count - 1)
-                    sb.Append(",");
-            }
-
-            sb.Append("]");
-            Console.WriteLine(sb.ToString());
+            Console.Write("Actual: " + Utils.PrintForConsole(solution.PacificAtlantic([[1, 2, 2, 3, 5], [3, 2, 3, 4, 4], [2, 4, 5, 3, 1], [6, 7, 1, 4, 5], [5, 1, 1, 2, 4]])));
         }
 
         public class Solution

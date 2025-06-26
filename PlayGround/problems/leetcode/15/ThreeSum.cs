@@ -17,27 +17,9 @@ namespace problems.leetcode._15
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[-1,0,1,2,-1,-4], Expected : [[-1,-1,2],[-1,0,1]]");
-            Console.Write("Actual: ");
-            PrintListOfLists(solution.ThreeSum([-1, 0, 1, 2, -1, -4]));
+            Console.Write("Actual: "+ Utils.PrintForConsole(solution.ThreeSum([-1, 0, 1, 2, -1, -4])));
         }
 
-        static void PrintListOfLists(IList<IList<int>> list)
-        {
-            var sb = new StringBuilder();
-            sb.Append("[");
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                sb.Append("[");
-                sb.Append(string.Join(",", list[i]));
-                sb.Append("]");
-                if (i < list.Count - 1)
-                    sb.Append(",");
-            }
-
-            sb.Append("]");
-            Console.WriteLine(sb.ToString());
-        }
 
         public class Solution
         {

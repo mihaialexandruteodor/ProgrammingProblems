@@ -15,48 +15,9 @@ namespace problems.leetcode._21
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("list1 = [1,2,4], list2 = [1,3,4], Expected : [1,1,2,3,4,4]");
-            Console.Write("Actual: ");
-            PrintLinkedListAsArray(solution.MergeTwoLists(CreateLinkedList([1, 2, 4]), CreateLinkedList([1, 3, 4])));
+            Console.Write("Actual: " + Utils.PrintForConsole(solution.MergeTwoLists(Utils.CreateLinkedList([1, 2, 4]), Utils.CreateLinkedList([1, 3, 4]))));
         }
 
-        public class ListNode
-        {
-            public int val;
-            public ListNode next;
-            public ListNode(int val = 0, ListNode next = null)
-            {
-                this.val = val;
-                this.next = next;
-            }
-        }
-
-        public void PrintLinkedListAsArray(ListNode head)
-        {
-            List<int> values = new List<int>();
-            while (head != null)
-            {
-                values.Add(head.val);
-                head = head.next;
-            }
-            string result = "[" + string.Join(",", values) + "]";
-            Console.WriteLine(result);
-        }
-
-        public ListNode CreateLinkedList(int[] values)
-        {
-            if (values == null || values.Length == 0) return null;
-
-            ListNode head = new ListNode(values[0]);
-            ListNode current = head;
-
-            for (int i = 1; i < values.Length; i++)
-            {
-                current.next = new ListNode(values[i]);
-                current = current.next;
-            }
-
-            return head;
-        }
         public class Solution
         {
             public ListNode MergeTwoLists(ListNode list1, ListNode list2)

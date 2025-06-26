@@ -122,7 +122,7 @@ namespace problems.leetcode._133
                 if (graphMap.TryGetValue(i, out var neighbors))
                 {
                     neighbors.Sort();
-                    output.Add("[" + string.Join(",", neighbors) + "]");
+                    output.Add(Utils.PrintForConsole(neighbors));
                 }
                 else
                 {
@@ -130,7 +130,7 @@ namespace problems.leetcode._133
                 }
             }
 
-            Console.WriteLine("[" + string.Join(",", output) + "]");
+            Console.WriteLine(Utils.PrintForConsole(output));
         }
 
 

@@ -19,7 +19,7 @@ namespace problems.leetcode._692
             Utils.Instance.PrintProblem(description, difficulty, topic);
             Solution solution = new Solution();
             Console.WriteLine("[\"i\",\"love\",\"leetcode\",\"i\",\"love\",\"coding\"], Expected : [\"i\",\"love\",\"coding\"]");
-            Console.WriteLine("Actual: " + "[" + string.Join(",", solution.TopKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 3)) + "]");
+            Console.WriteLine("Actual: " + Utils.PrintForConsole(solution.TopKFrequent(["i", "love", "leetcode", "i", "love", "coding"], 3)));
         }
 
         public class Solution
