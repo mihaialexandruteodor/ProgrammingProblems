@@ -2,7 +2,7 @@
 <img src="2.png">
 
 # ProgrammingProblems
-Solving various problems from Leetcode and past interviews
+Solving various problems from Leetcode and past interviews. Program contains working solutions that execute from the selection list, along with a printout of each solution code. Navigate the list with the arrow keys or use first option and type in the problem number.
 
 ## Getting Started with C# in VS Code
 https://code.visualstudio.com/docs/csharp/get-started
