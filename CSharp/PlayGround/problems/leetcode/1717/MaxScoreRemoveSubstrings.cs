@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text;
 using static IBaseSolution;
 
 namespace problems.leetcode._1717
@@ -22,9 +23,68 @@ namespace problems.leetcode._1717
         {
             public int MaximumGain(string s, int x, int y)
             {
-                return 0;
+                if (x < y)
+                {
+                    // Always handle the higher point first
+                    (x, y) = (y, x);
+                    s = ReversePairs(s);  // Transform "ab" <=> "ba" while keeping relative structure
+                }
+
+                int score = 0;
+                Stack<char> stack = new Stack<char>();
+
+                // First pass: remove "ab" and gain x points
+                foreach (char c in s)
+                {
+                    if (stack.Count > 0 && stack.Peek() == 'a' && c == 'b')
+                    {
+                        stack.Pop();
+                        score += x;
+                    }
+                    else
+                    {
+                        stack.Push(c);
+                    }
+                }
+
+                // Reconstruct string for second pass
+                var temp = new Stack<char>();
+                while (stack.Count > 0)
+                {
+                    temp.Push(stack.Pop());
+                }
+
+                // Second pass: remove "ba" and gain y points
+                foreach (char c in temp)
+                {
+                    if (stack.Count > 0 && stack.Peek() == 'b' && c == 'a')
+                    {
+                        stack.Pop();
+                        score += y;
+                    }
+                    else
+                    {
+                        stack.Push(c);
+                    }
+                }
+
+                return score;
+            }
+
+            private string ReversePairs(string s)
+            {
+                // Swaps all 'a' with 'b' and vice versa
+                var sb = new StringBuilder();
+                foreach (char c in s)
+                {
+                    if (c == 'a') sb.Append('b');
+                    else if (c == 'b') sb.Append('a');
+                    else sb.Append(c);
+                }
+                return sb.ToString();
             }
         }
+
 
         public void printSource()
         {
