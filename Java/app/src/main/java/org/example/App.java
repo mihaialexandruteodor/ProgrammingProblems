@@ -3,12 +3,14 @@
  */
 package org.example;
 
+import org.example.leetcode.problem3397.Solution3397;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Solution3397.runProblem();
     }
 }
