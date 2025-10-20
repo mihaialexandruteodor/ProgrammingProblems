@@ -3,7 +3,7 @@
  */
 package org.example;
 
-import org.example.leetcode.problem1625.Solution1625;
+import org.example.leetcode.problem1.Solution1;
 
 public class App {
     public String getGreeting() {
@@ -11,6 +11,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        Solution1625.runProblem();
+        Solution1 solution1 = new Solution1();
+        solution1.solve();
     }
 }
