@@ -2,14 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "gradle run",
+      "label": "Gradle: run CLI",
       "type": "shell",
-      "command": "./gradlew",
-      "args": ["run"],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "command": "./gradlew :app:run",
+      "problemMatcher": []
+    },
+    {
+      "label": "Gradle: run GUI",
+      "type": "shell",
+      "command": "./gradlew :app:runGui",
       "problemMatcher": []
     }
   ]

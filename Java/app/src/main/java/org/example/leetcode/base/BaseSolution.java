@@ -2,17 +2,32 @@ package org.example.leetcode.base;
 
 public abstract class BaseSolution {
 
-    /**
-     * Standard entry point for all LeetCode solutions.
-     * Each subclass must override this method to demonstrate or test its logic.
-     */
     public abstract void solve();
 
-    /**
-     * Prints the source code of the implementing class.
-     * Relies on a SourcePrinter utility class.
-     */
     public void printSource() {
         SourcePrinter.printSource(this.getClass());
+    }
+
+    // Metadata properties — instance fields
+    protected String name = "Unnamed Problem";
+    protected Utils.Difficulty difficulty = Utils.Difficulty.EASY;
+    protected Utils.Topic topic = Utils.Topic.OTHER;
+    protected String description = "";
+
+    // Accessors
+    public String getName() {
+        return name;
+    }
+
+    public Utils.Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public Utils.Topic getTopic() {
+        return topic;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -154,7 +154,7 @@ public final class Utils {
     }
 
     public enum Topic {
-        ARRAYS, STRINGS, LINKED_LISTS, TREES, GRAPHS, DYNAMIC_PROGRAMMING, GREEDY, OTHER
+        ARRAYS, BINARY, STRINGS, LINKED_LISTS, TREES, INTERVAL, GRAPHS, DYNAMIC_PROGRAMMING, GREEDY, MATRIX, OTHER
     }
 
     // -----------------------------

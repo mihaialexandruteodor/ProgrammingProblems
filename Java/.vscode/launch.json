@@ -1,16 +1,21 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-
-        {
-            "name": "Gradle Run",
-            "type": "java",
-            "request": "launch",
-            "preLaunchTask": "gradle run",
-            "mainClass": "org.example.App"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Run CLI (App.java)",
+      "request": "launch",
+      "mainClass": "org.example.App",
+      "projectName": "app",
+      "preLaunchTask": "Gradle: run CLI"
+    },
+    {
+      "type": "java",
+      "name": "Run GUI (ProblemBrowser)",
+      "request": "launch",
+      "mainClass": "org.example.leetcode.gui.ProblemBrowser",
+      "projectName": "app",
+      "preLaunchTask": "Gradle: run GUI"
+    }
+  ]
 }
