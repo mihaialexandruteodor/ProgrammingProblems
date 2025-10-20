@@ -11,7 +11,7 @@ import org.example.leetcode.base.Utils.Difficulty;
 import org.example.leetcode.base.Utils.Topic;
 
 public class Solution1625 extends BaseSolution {
-
+    public static String name = "1625. Lexicographically Smallest String After Applying Operations";
     public static Difficulty difficulty = Difficulty.EASY;
     public static Topic topic = Topic.ARRAYS;
     public static String description = "You are given a string s of even length consisting of digits from 0 to 9, and two integers a and b.\n"

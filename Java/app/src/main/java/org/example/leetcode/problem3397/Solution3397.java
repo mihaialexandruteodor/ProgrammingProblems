@@ -4,14 +4,12 @@ import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 import org.example.leetcode.base.Utils.Difficulty;
 import org.example.leetcode.base.Utils.Topic;
-import org.example.leetcode.problem1.Solution1.Solution;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Solution3397 extends BaseSolution {
-
+    public static String name = "3397. Maximum Number of Distinct Elements After Operations";
     public static Difficulty difficulty = Difficulty.MEDIUM;
     public static Topic topic = Topic.STRINGS;
     public static String description = "You are given an integer array nums and an integer k.\n" + //
