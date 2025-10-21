@@ -1,5 +1,6 @@
 package org.example.leetcode.gui;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
@@ -7,6 +8,8 @@ import org.reflections.Reflections;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.FontUIResource;
+
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -56,7 +59,20 @@ public class ProblemBrowserSwing {
     }
 
     private void initUI() {
-        FlatLightLaf.install();
+        // Dark theme
+        try {
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Increase default font size for all Swing components
+        FontUIResource f = new FontUIResource("Segoe UI", Font.PLAIN, 16);
+        for (Object key : UIManager.getDefaults().keySet()) {
+            if (UIManager.get(key) instanceof FontUIResource) {
+                UIManager.put(key, f);
+            }
+        }
 
         frame = new JFrame("LeetCode Problem Browser");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
