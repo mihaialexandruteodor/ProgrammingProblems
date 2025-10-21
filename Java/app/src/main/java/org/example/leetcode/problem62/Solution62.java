@@ -76,7 +76,9 @@ public class Solution62 extends BaseSolution {
 
     @Override
     public void solve() {
-        Utils.getInstance().printProblem(description, difficulty, topic);
+        if (!isGuiRun) {
+            Utils.getInstance().printProblem(description, difficulty, topic);
+        }
         Solution solution = new Solution();
         System.out.println("Expected : 28");
         System.out.println("Actual:" + solution.uniquePaths(3, 7));

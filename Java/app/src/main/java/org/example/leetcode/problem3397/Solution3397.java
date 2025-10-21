@@ -75,7 +75,9 @@ public class Solution3397 extends BaseSolution {
 
     @Override
     public void solve() {
-        Utils.getInstance().printProblem(description, difficulty, topic);
+        if (!isGuiRun) {
+            Utils.getInstance().printProblem(description, difficulty, topic);
+        }
         Solution solution = new Solution();
         int[] nums = { 1, 2, 2, 3, 3, 4 };
         System.out.println("Expected: 6");

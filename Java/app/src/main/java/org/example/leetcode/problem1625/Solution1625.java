@@ -111,7 +111,9 @@ public class Solution1625 extends BaseSolution {
     }
 
     public void solve() {
-        Utils.getInstance().printProblem(description, difficulty, topic);
+        if (!isGuiRun) {
+            Utils.getInstance().printProblem(description, difficulty, topic);
+        }
         Solution solution = new Solution();
         System.out.println("Expected: 2050");
         System.out.println("Actual: " + solution.findLexSmallestString("5525", 9, 2));

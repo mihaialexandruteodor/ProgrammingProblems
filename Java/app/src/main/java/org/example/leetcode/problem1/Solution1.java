@@ -13,7 +13,9 @@ public class Solution1 extends BaseSolution {
     }
 
     public void solve() {
-        Utils.getInstance().printProblem(description, difficulty, topic);
+        if (!isGuiRun) {
+            Utils.getInstance().printProblem(description, difficulty, topic);
+        }
         Solution solution = new Solution();
         System.out.println("[2,7,11,15], t=9, Expected : [0,1]");
         System.out.println("Actual:" + Utils.printForConsole(solution.TwoSum(new int[] { 2, 7, 11, 15 }, 9)));

@@ -2,19 +2,27 @@ package org.example.leetcode.base;
 
 public abstract class BaseSolution {
 
+    protected boolean isGuiRun = false;
+
+    public void setGuiRun(boolean isGuiRun) {
+        this.isGuiRun = isGuiRun;
+    }
+
+    public boolean isGuiRun() {
+        return isGuiRun;
+    }
+
     public abstract void solve();
 
     public void printSource() {
         SourcePrinter.printSource(this.getClass());
     }
 
-    // Metadata properties — instance fields
     protected String name = "Unnamed Problem";
     protected Utils.Difficulty difficulty = Utils.Difficulty.EASY;
     protected Utils.Topic topic = Utils.Topic.OTHER;
     protected String description = "";
 
-    // Accessors
     public String getName() {
         return name;
     }

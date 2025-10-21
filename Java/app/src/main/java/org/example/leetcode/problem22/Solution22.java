@@ -58,7 +58,9 @@ public class Solution22 extends BaseSolution {
 
     @Override
     public void solve() {
-        Utils.getInstance().printProblem(description, difficulty, topic);
+        if (!isGuiRun) {
+            Utils.getInstance().printProblem(description, difficulty, topic);
+        }
         Solution solution = new Solution();
         System.out.println("Expected : [\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]");
         System.out.println("Actual:" + Utils.printForConsole(solution.generateParenthesis(3)));

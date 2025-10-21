@@ -4,6 +4,8 @@ import java.util.*;
 
 public final class Utils {
 
+    public static boolean GUI_MODE = false;
+
     // Singleton instance
     private static final Utils INSTANCE = new Utils();
 
@@ -73,6 +75,10 @@ public final class Utils {
     // Problem Info Printer
     // -----------------------------
     public void printProblem(String description, Difficulty difficulty, Topic topic) {
+        if (GUI_MODE) {
+            // Suppress CLI color printing when running in GUI
+            return;
+        }
         System.out.print("Level: ");
         switch (difficulty) {
             case EASY -> setColor(ConsoleColor.BLUE);
