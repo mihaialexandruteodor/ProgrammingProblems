@@ -10,9 +10,9 @@
     },
     {
       "type": "java",
-      "name": "Run GUI (ProblemBrowser)",
+      "name": "Run GUI (ProblemBrowserSwing)",
       "request": "launch",
-      "mainClass": "org.example.leetcode.gui.ProblemBrowser",
+      "mainClass": "org.example.leetcode.gui.ProblemBrowserSwing",
       "preLaunchTask": "Gradle: run GUI"
     }
   ]

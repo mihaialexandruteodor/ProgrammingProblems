@@ -6,20 +6,11 @@ repositories {
     mavenCentral()
 }
 
-def javafxVersion = "21"
-def javafxPlatform = "mac-aarch64"
-
 dependencies {
-    // JavaFX modules
-    implementation "org.openjfx:javafx-base:${javafxVersion}:${javafxPlatform}"
-    implementation "org.openjfx:javafx-controls:${javafxVersion}:${javafxPlatform}"
-    implementation "org.openjfx:javafx-graphics:${javafxVersion}:${javafxPlatform}"
-    implementation "org.openjfx:javafx-fxml:${javafxVersion}:${javafxPlatform}"
-
-    // Your libraries
+    implementation 'com.formdev:flatlaf:3.2'  // <- this is correct
+    implementation 'org.reflections:reflections:0.10.2'
     testImplementation libs.junit
     implementation libs.guava
-    implementation 'org.reflections:reflections:0.10.2'
 }
 
 // Java toolchain
@@ -34,24 +25,10 @@ application {
     mainClass = 'org.example.App'
 }
 
-// Custom GUI task
+// GUI run task
 tasks.register('runGui', JavaExec) {
     group = 'application'
-    description = 'Run the JavaFX Problem Browser GUI.'
+    description = 'Run the Swing Problem Browser GUI.'
     classpath = sourceSets.main.runtimeClasspath
-    mainClass.set('org.example.leetcode.gui.ProblemBrowser')
-
-    doFirst {
-        // Use runtimeClasspath which is resolvable
-        def javafxJars = sourceSets.main.runtimeClasspath
-            .filter { it.name.startsWith("javafx") }
-            .collect { it.absolutePath }
-        jvmArgs = [
-            '--module-path', javafxJars.join(File.pathSeparator),
-            '--add-modules', 'javafx.controls,javafx.fxml'
-        ]
-    }
+    mainClass.set('org.example.leetcode.gui.ProblemBrowserSwing')
 }
-
-
-
