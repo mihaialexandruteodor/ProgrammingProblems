@@ -14,7 +14,59 @@ public class Solution200 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        char[][] grid = new char[][] {
+                { '1', '1', '1', '1', '0' },
+                { '1', '1', '0', '1', '0' },
+                { '1', '1', '0', '0', '0' },
+                { '0', '0', '0', '0', '0' }
+        };
+
+        System.out.println("Expected : 1");
+        System.out.println("Actual: " + solution.numIslands(grid));
+    }
+
+    public class Solution {
+        public int numIslands(char[][] grid) {
+            if (grid == null || grid.length == 0)
+                return 0;
+
+            int rows = grid.length;
+            int cols = grid[0].length;
+            boolean[][] visited = new boolean[rows][cols];
+            int count = 0;
+
+            int[][] directions = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+
+            // DFS helper
+            java.util.function.BiConsumer<Integer, Integer> dfs = new java.util.function.BiConsumer<>() {
+                @Override
+                public void accept(Integer r, Integer c) {
+                    visited[r][c] = true;
+                    for (int[] d : directions) {
+                        int nr = r + d[0];
+                        int nc = c + d[1];
+                        if (nr >= 0 && nr < rows && nc >= 0 && nc < cols &&
+                                grid[nr][nc] == '1' && !visited[nr][nc]) {
+                            this.accept(nr, nc);
+                        }
+                    }
+                }
+            };
+
+            for (int r = 0; r < rows; r++) {
+                for (int c = 0; c < cols; c++) {
+                    if (grid[r][c] == '1' && !visited[r][c]) {
+                        count++;
+                        dfs.accept(r, c);
+                    }
+                }
+            }
+
+            return count;
+        }
     }
 
 }

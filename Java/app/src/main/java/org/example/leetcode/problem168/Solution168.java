@@ -14,7 +14,32 @@ public class Solution168 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("Expected : AZ");
+        System.out.println("Actual: " + solution.convertToTitle(52));
+    }
+
+    public class Solution {
+        public String convertToTitle(int columnNumber) {
+            StringBuilder res = new StringBuilder();
+
+            while (columnNumber > 0) {
+                int currDigitBase26 = (columnNumber % 26) - 1;
+                columnNumber /= 26;
+
+                if (currDigitBase26 == -1) {
+                    currDigitBase26 = 25;
+                    columnNumber--;
+                }
+
+                char currentChar = (char) ('A' + currDigitBase26);
+                res.insert(0, currentChar);
+            }
+
+            return res.toString();
+        }
     }
 
 }

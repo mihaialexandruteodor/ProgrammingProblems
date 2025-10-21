@@ -14,7 +14,30 @@ public class Solution206 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        int[] values = { 1, 2, 3, 4, 5 };
+        Utils.ListNode head = Utils.createLinkedList(values);
+
+        System.out.println("[1,2,3,4,5], Expected : [5,4,3,2,1]");
+        System.out.println("Actual: " + Utils.printForConsole(solution.reverseList(head)));
+    }
+
+    public class Solution {
+        public Utils.ListNode reverseList(Utils.ListNode head) {
+            Utils.ListNode prev = null;
+            Utils.ListNode curr = head;
+
+            while (curr != null) {
+                Utils.ListNode next = curr.next; // temporarily store next node
+                curr.next = prev; // reverse the current node's pointer
+                prev = curr; // move prev one step forward
+                curr = next; // move curr one step forward
+            }
+
+            return prev; // new head of the reversed list
+        }
     }
 
 }

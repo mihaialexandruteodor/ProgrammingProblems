@@ -1,5 +1,8 @@
 package org.example.leetcode.problem217;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +17,25 @@ public class Solution217 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("[1,2,3,4], Expected : False");
+        System.out.println("Actual: " + solution.containsDuplicate(new int[] { 1, 2, 3, 4 }));
+    }
+
+    public class Solution {
+        public boolean containsDuplicate(int[] nums) {
+            Set<Integer> set = new HashSet<>();
+            for (int num : nums) {
+                if (set.contains(num)) {
+                    return true;
+                } else {
+                    set.add(num);
+                }
+            }
+            return false;
+        }
     }
 
 }

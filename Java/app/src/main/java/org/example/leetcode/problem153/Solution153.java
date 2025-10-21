@@ -14,7 +14,28 @@ public class Solution153 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("[4,5,6,7,0,1,2], Expected : 0");
+        int[] nums1 = new int[] { 4, 5, 6, 7, 0, 1, 2 };
+        System.out.println("Actual: " + solution.findMin(nums1));
+    }
+
+    public class Solution {
+        public int findMin(int[] nums) {
+            if (nums[0] < nums[nums.length - 1] || nums.length == 1)
+                return nums[0];
+
+            int min = Integer.MAX_VALUE;
+            for (int i = 0; i < nums.length - 1; i++) {
+                if (nums[i] > nums[i + 1])
+                    return nums[i + 1];
+                if (nums[i] < min)
+                    min = nums[i];
+            }
+            return min;
+        }
     }
 
 }

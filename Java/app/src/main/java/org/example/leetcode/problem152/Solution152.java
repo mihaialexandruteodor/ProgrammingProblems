@@ -14,7 +14,32 @@ public class Solution152 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("[2,3,-2,4], Expected : 6");
+        int[] nums1 = new int[] { 2, 3, -2, 4 };
+        System.out.println("Actual: " + solution.maxProduct(nums1));
+    }
+
+    public class Solution {
+        public int maxProduct(int[] nums) {
+            if (nums == null || nums.length == 0)
+                return 0;
+
+            int maxProd = nums[0];
+            int minProd = nums[0];
+            int result = nums[0];
+
+            for (int i = 1; i < nums.length; i++) {
+                int tempMax = maxProd;
+                maxProd = Math.max(nums[i], Math.max(maxProd * nums[i], minProd * nums[i]));
+                minProd = Math.min(nums[i], Math.min(tempMax * nums[i], minProd * nums[i]));
+                result = Math.max(result, maxProd);
+            }
+
+            return result;
+        }
     }
 
 }

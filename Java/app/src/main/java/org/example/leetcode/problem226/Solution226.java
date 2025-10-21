@@ -14,7 +14,29 @@ public class Solution226 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("[4,2,7,1,3,6,9], Expected : [4,7,2,9,6,3,1]");
+        System.out.print("Actual: ");
+        Utils.printTreeAsArray(solution.invertTree(Utils.buildTree(new Integer[] { 4, 2, 7, 1, 3, 6, 9 })));
+    }
+
+    public class Solution {
+        public Utils.TreeNode invertTree(Utils.TreeNode root) {
+            if (root == null)
+                return null;
+
+            Utils.TreeNode left = root.left;
+            Utils.TreeNode right = root.right;
+            root.left = right;
+            root.right = left;
+
+            invertTree(left);
+            invertTree(right);
+
+            return root;
+        }
     }
 
 }

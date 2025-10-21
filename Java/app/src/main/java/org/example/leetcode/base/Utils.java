@@ -279,4 +279,91 @@ public final class Utils {
         System.out.println(Utils.printForConsole(output));
     }
 
+    // TreeNode definition
+    public static class TreeNode {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+
+        public TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    // BuildTree helper
+    public static TreeNode buildTree(Integer[] values) {
+        if (values == null || values.length == 0 || values[0] == null)
+            return null;
+
+        TreeNode root = new TreeNode(values[0]);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int i = 1;
+
+        while (i < values.length) {
+            TreeNode current = queue.poll();
+
+            // Add left child
+            if (i < values.length && values[i] != null) {
+                current.left = new TreeNode(values[i]);
+                queue.add(current.left);
+            }
+            i++;
+
+            // Add right child
+            if (i < values.length && values[i] != null) {
+                current.right = new TreeNode(values[i]);
+                queue.add(current.right);
+            }
+            i++;
+        }
+
+        return root;
+    }
+
+    public static void printTreeAsArray(TreeNode root) {
+        if (root == null) {
+            System.out.println("[]");
+            return;
+        }
+
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            if (current != null) {
+                result.add(current.val);
+                queue.add(current.left);
+                queue.add(current.right);
+            } else {
+                result.add(null);
+            }
+        }
+
+        // Trim trailing nulls
+        int i = result.size() - 1;
+        while (i >= 0 && result.get(i) == null) {
+            result.remove(i);
+            i--;
+        }
+
+        // Print as array format
+        System.out.print("[");
+        for (int j = 0; j < result.size(); j++) {
+            System.out.print(result.get(j) != null ? result.get(j) : "null");
+            if (j < result.size() - 1) {
+                System.out.print(",");
+            }
+        }
+        System.out.println("]");
+    }
+
 }
