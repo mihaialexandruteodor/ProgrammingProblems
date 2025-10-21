@@ -156,8 +156,27 @@ public class ProblemBrowser extends Application {
             }
         });
 
+        // LeetCode button
+        Button leetCodeButton = new Button("Open LeetCode Problem");
+        leetCodeButton.setOnAction(e -> {
+            String url = problem.getLeetcodeUrl();
+            if (url != null && !url.isEmpty()) {
+                try {
+                    java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+                } catch (Exception ex) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Failed to open LeetCode URL");
+                    alert.setContentText(ex.getMessage());
+                    alert.showAndWait();
+                }
+            }
+        });
+
+        HBox buttonBox = new HBox(10, runButton, leetCodeButton);
+
         box.getChildren().addAll(title, desc, new Label("Solution Inner Class:"), solutionSource,
-                runButton, new Label("Output:"), outputArea);
+                buttonBox, new Label("Output:"), outputArea);
 
         stage.setScene(new Scene(box, 700, 650));
         stage.setTitle(problem.getName());

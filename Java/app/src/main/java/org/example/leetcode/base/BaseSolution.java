@@ -39,4 +39,8 @@ public abstract class BaseSolution {
     public String getDescription() {
         return description;
     }
+
+    public String getLeetcodeUrl() {
+        return leetcodeurl;
+    }
 }

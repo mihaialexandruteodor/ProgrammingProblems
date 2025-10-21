@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 public class SourcePrinter {
 
+    @SuppressWarnings("unused")
     public static void printSource(Class<?> solutionClass) {
         String className = "Solution"; // inner class to locate (if used)
         String pkg = solutionClass.getPackageName();
