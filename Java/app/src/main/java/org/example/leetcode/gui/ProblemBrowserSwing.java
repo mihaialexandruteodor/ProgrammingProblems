@@ -1,7 +1,6 @@
 package org.example.leetcode.gui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 import org.reflections.Reflections;
@@ -76,7 +75,7 @@ public class ProblemBrowserSwing {
 
         frame = new JFrame("LeetCode Problem Browser");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 600);
+        frame.setSize(1200, 720);
         frame.setLayout(new BorderLayout(10, 10));
 
         JPanel filterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
