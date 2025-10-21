@@ -8,7 +8,7 @@ import org.reflections.Reflections;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.FontUIResource;
-
+import javax.swing.text.*;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -58,20 +58,14 @@ public class ProblemBrowserSwing {
     }
 
     private void initUI() {
-        // Dark theme
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        // Increase default font size for all Swing components
         FontUIResource f = new FontUIResource("Segoe UI", Font.PLAIN, 16);
-        for (Object key : UIManager.getDefaults().keySet()) {
-            if (UIManager.get(key) instanceof FontUIResource) {
-                UIManager.put(key, f);
-            }
-        }
+        setUIFont(f);
 
         frame = new JFrame("LeetCode Problem Browser");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,12 +89,20 @@ public class ProblemBrowserSwing {
         searchField = new JTextField(20);
         searchField.getDocument().addDocumentListener((SimpleDocumentListener) this::updateList);
 
+        // Font size buttons
+        JButton increaseFontBtn = new JButton("+");
+        JButton decreaseFontBtn = new JButton("-");
+        increaseFontBtn.addActionListener(e -> adjustFontSize(2));
+        decreaseFontBtn.addActionListener(e -> adjustFontSize(-2));
+
         filterPanel.add(new JLabel("Difficulty:"));
         filterPanel.add(difficultyFilter);
         filterPanel.add(new JLabel("Topic:"));
         filterPanel.add(topicFilter);
         filterPanel.add(new JLabel("Search:"));
         filterPanel.add(searchField);
+        filterPanel.add(increaseFontBtn);
+        filterPanel.add(decreaseFontBtn);
 
         listModel = new DefaultListModel<>();
         problemList = new JList<>(listModel);
@@ -169,11 +171,8 @@ public class ProblemBrowserSwing {
 
         window.add(topPanel, BorderLayout.NORTH);
 
-        JTextArea sourceArea = new JTextArea(getInnerSolutionSource(problem));
-        sourceArea.setLineWrap(true);
-        sourceArea.setWrapStyleWord(true);
-        sourceArea.setEditable(false);
-        JScrollPane sourceScroll = new JScrollPane(sourceArea);
+        JTextPane sourcePane = createCodePane(getInnerSolutionSource(problem));
+        JScrollPane sourceScroll = new JScrollPane(sourcePane);
         sourceScroll.setPreferredSize(new Dimension(650, 200));
 
         JButton runButton = new JButton("Run Solution");
@@ -226,6 +225,98 @@ public class ProblemBrowserSwing {
 
         window.add(centerPanel, BorderLayout.CENTER);
         window.setVisible(true);
+    }
+
+    private JTextPane createCodePane(String code) {
+        JTextPane codePane = new JTextPane();
+        codePane.setEditable(false);
+        codePane.setFont(new Font("Consolas", Font.PLAIN, 14));
+
+        StyledDocument doc = codePane.getStyledDocument();
+        addStylesToDocument(doc);
+
+        try {
+            doc.insertString(0, code, doc.getStyle("default"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        highlightJavaSyntax(doc, code);
+        return codePane;
+    }
+
+    private void addStylesToDocument(StyledDocument doc) {
+        Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+        Style defaultStyle = doc.addStyle("default", def);
+        StyleConstants.setForeground(defaultStyle, Color.WHITE);
+
+        Style keyword = doc.addStyle("keyword", null);
+        StyleConstants.setForeground(keyword, Color.CYAN);
+        StyleConstants.setBold(keyword, true);
+
+        Style comment = doc.addStyle("comment", null);
+        StyleConstants.setForeground(comment, Color.GREEN.darker());
+
+        Style string = doc.addStyle("string", null);
+        StyleConstants.setForeground(string, Color.ORANGE);
+    }
+
+    private void highlightJavaSyntax(StyledDocument doc, String code) {
+        String[] keywords = new String[] {
+                "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
+                "const", "continue", "default", "do", "double", "else", "enum", "extends", "final",
+                "finally", "float", "for", "if", "implements", "import", "instanceof", "int", "interface",
+                "long", "native", "new", "package", "private", "protected", "public", "return", "short",
+                "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
+                "transient", "try", "void", "volatile", "while"
+        };
+
+        try {
+            String[] lines = code.split("\n");
+            int offset = 0;
+
+            for (String line : lines) {
+                if (line.trim().startsWith("//")) {
+                    doc.setCharacterAttributes(offset, line.length(), doc.getStyle("comment"), false);
+                } else {
+                    for (String kw : keywords) {
+                        int idx = line.indexOf(kw);
+                        while (idx >= 0) {
+                            doc.setCharacterAttributes(offset + idx, kw.length(), doc.getStyle("keyword"), false);
+                            idx = line.indexOf(kw, idx + kw.length());
+                        }
+                    }
+                    int start = line.indexOf("\"");
+                    while (start >= 0) {
+                        int end = line.indexOf("\"", start + 1);
+                        if (end < 0)
+                            break;
+                        doc.setCharacterAttributes(offset + start, end - start + 1, doc.getStyle("string"), false);
+                        start = line.indexOf("\"", end + 1);
+                    }
+                }
+                offset += line.length() + 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void adjustFontSize(int delta) {
+        Font f = UIManager.getFont("Label.font");
+        if (f == null)
+            f = new Font("Segoe UI", Font.PLAIN, 16);
+        Font newFont = f.deriveFont((float) (f.getSize() + delta));
+        setUIFont(new FontUIResource(newFont));
+        SwingUtilities.updateComponentTreeUI(frame);
+    }
+
+    private void setUIFont(FontUIResource f) {
+        for (Object key : UIManager.getDefaults().keySet()) {
+            if (UIManager.get(key) instanceof FontUIResource) {
+                UIManager.put(key, f);
+            }
+        }
     }
 
     private String getInnerSolutionSource(BaseSolution problem) {
