@@ -1,5 +1,8 @@
 package org.example.leetcode.problem1717;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +17,67 @@ public class Solution1717 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("s = \"cdbcbbaaabab\", x = 4, y = 5 ,Expected : 19");
+        System.out.println("Actual: " + solution.maximumGain("cdbcbbaaabab", 4, 5));
+    }
 
+    public class Solution {
+        public int maximumGain(String s, int x, int y) {
+            if (x < y) {
+                // Always handle the higher point first
+                int temp = x;
+                x = y;
+                y = temp;
+                s = reversePairs(s); // Transform "ab" <=> "ba"
+            }
+
+            int score = 0;
+            Deque<Character> stack = new ArrayDeque<>();
+
+            // First pass: remove "ab" and gain x points
+            for (char c : s.toCharArray()) {
+                if (!stack.isEmpty() && stack.peek() == 'a' && c == 'b') {
+                    stack.pop();
+                    score += x;
+                } else {
+                    stack.push(c);
+                }
+            }
+
+            // Reconstruct string for second pass
+            Deque<Character> tempStack = new ArrayDeque<>();
+            while (!stack.isEmpty()) {
+                tempStack.push(stack.pop());
+            }
+            stack.clear();
+
+            // Second pass: remove "ba" and gain y points
+            for (char c : tempStack) {
+                if (!stack.isEmpty() && stack.peek() == 'b' && c == 'a') {
+                    stack.pop();
+                    score += y;
+                } else {
+                    stack.push(c);
+                }
+            }
+
+            return score;
+        }
+
+        private String reversePairs(String s) {
+            StringBuilder sb = new StringBuilder();
+            for (char c : s.toCharArray()) {
+                if (c == 'a')
+                    sb.append('b');
+                else if (c == 'b')
+                    sb.append('a');
+                else
+                    sb.append(c);
+            }
+            return sb.toString();
+        }
     }
 
 }

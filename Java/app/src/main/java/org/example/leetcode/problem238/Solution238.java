@@ -14,7 +14,33 @@ public class Solution238 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("[1,2,3,4], Expected : [24,12,8,6]");
+        System.out.println("Actual: " + Utils.printForConsole(solution.productExceptSelf(new int[] { 1, 2, 3, 4 })));
+    }
+
+    public class Solution {
+        public int[] productExceptSelf(int[] nums) {
+            int n = nums.length;
+            int[] answer = new int[n];
+
+            // Step 1: Calculate left products
+            answer[0] = 1;
+            for (int i = 1; i < n; i++) {
+                answer[i] = answer[i - 1] * nums[i - 1];
+            }
+
+            // Step 2: Multiply by right products
+            int R = 1;
+            for (int i = n - 1; i >= 0; i--) {
+                answer[i] *= R;
+                R *= nums[i];
+            }
+
+            return answer;
+        }
     }
 
 }

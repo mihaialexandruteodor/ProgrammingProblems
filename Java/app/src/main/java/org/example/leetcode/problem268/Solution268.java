@@ -14,7 +14,29 @@ public class Solution268 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        int[] nums = { 3, 0, 1 };
+        System.out.println("[3,0,1], Expected : 2");
+        System.out.println("Actual: " + solution.missingNumber(nums));
+    }
+
+    public class Solution {
+        public int missingNumber(int[] nums) {
+            int n = nums.length;
+            int xor = 0;
+
+            // XOR all indices and numbers
+            for (int i = 0; i < n; i++) {
+                xor ^= i;
+                xor ^= nums[i];
+            }
+
+            // XOR with n
+            xor ^= n;
+            return xor;
+        }
     }
 
 }

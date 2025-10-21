@@ -1,5 +1,7 @@
 package org.example.leetcode.problem322;
 
+import java.util.Arrays;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +16,32 @@ public class Solution322 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        int[] coins = { 1, 2, 5 };
+        int amount = 11;
+        System.out.println("coins = [1,2,5], amount = 11, Expected : 3");
+        System.out.println("Explanation: 11 = 5 + 5 + 1");
+        System.out.println("Actual: " + solution.coinChange(coins, amount));
+    }
+
+    public class Solution {
+        public int coinChange(int[] coins, int amount) {
+            int[] dp = new int[amount + 1];
+            Arrays.fill(dp, amount + 1);
+            dp[0] = 0;
+
+            for (int target = 1; target <= amount; target++) {
+                for (int coin : coins) {
+                    if (target - coin >= 0) {
+                        dp[target] = Math.min(dp[target], 1 + dp[target - coin]);
+                    }
+                }
+            }
+
+            return dp[amount] == amount + 1 ? -1 : dp[amount];
+        }
     }
 
 }

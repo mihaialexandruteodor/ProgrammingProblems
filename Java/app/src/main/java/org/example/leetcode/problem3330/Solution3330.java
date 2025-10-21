@@ -1,5 +1,8 @@
 package org.example.leetcode.problem3330;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +17,35 @@ public class Solution3330 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("abbcccc ,Expected : 5");
+        System.out.println("Actual: " + solution.possibleStringCount("abbcccc"));
+    }
 
+    public class Solution {
+        public int possibleStringCount(String word) {
+            int count = 1;
+            char prev = '\0';
+            Map<Character, Integer> freq = new HashMap<>();
+
+            for (char c : word.toCharArray()) {
+                if (!freq.containsKey(c)) {
+                    freq.put(c, 1);
+                } else if (c == prev) {
+                    freq.put(c, freq.get(c) + 1);
+                }
+                prev = c;
+            }
+
+            for (int val : freq.values()) {
+                if (val > 1) {
+                    count += val - 1;
+                }
+            }
+
+            return count;
+        }
     }
 
 }

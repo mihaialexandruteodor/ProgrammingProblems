@@ -1,5 +1,9 @@
 package org.example.leetcode.problem417;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +18,59 @@ public class Solution417 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        int[][] heights = {
+                { 1, 2, 2, 3, 5 },
+                { 3, 2, 3, 4, 4 },
+                { 2, 4, 5, 3, 1 },
+                { 6, 7, 1, 4, 5 },
+                { 5, 1, 1, 2, 4 }
+        };
+        System.out.println("Expected : [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]");
+        System.out.println("Actual: " + Utils.printForConsole(solution.pacificAtlantic(heights)));
+    }
+
+    public class Solution {
+        private final int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        public List<List<Integer>> pacificAtlantic(int[][] heights) {
+            int rows = heights.length, cols = heights[0].length;
+            boolean[][] pac = new boolean[rows][cols];
+            boolean[][] atl = new boolean[rows][cols];
+
+            for (int c = 0; c < cols; c++) {
+                dfs(heights, 0, c, pac);
+                dfs(heights, rows - 1, c, atl);
+            }
+            for (int r = 0; r < rows; r++) {
+                dfs(heights, r, 0, pac);
+                dfs(heights, r, cols - 1, atl);
+            }
+
+            List<List<Integer>> res = new ArrayList<>();
+            for (int r = 0; r < rows; r++) {
+                for (int c = 0; c < cols; c++) {
+                    if (pac[r][c] && atl[r][c]) {
+                        res.add(Arrays.asList(r, c));
+                    }
+                }
+            }
+            return res;
+        }
+
+        private void dfs(int[][] heights, int r, int c, boolean[][] visited) {
+            visited[r][c] = true;
+            for (int[] dir : dirs) {
+                int nr = r + dir[0], nc = c + dir[1];
+                if (nr < 0 || nc < 0 || nr >= heights.length || nc >= heights[0].length)
+                    continue;
+                if (visited[nr][nc] || heights[nr][nc] < heights[r][c])
+                    continue;
+                dfs(heights, nr, nc, visited);
+            }
+        }
     }
 
 }

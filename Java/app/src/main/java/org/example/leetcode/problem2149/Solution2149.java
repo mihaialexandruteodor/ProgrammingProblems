@@ -14,7 +14,48 @@ public class Solution2149 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        int[] nums = new int[] { -1, 1 };
+        Solution solution = new Solution();
+        int[] res = solution.rearrangeArray(nums);
+        System.out.println("Expected : 1 -1");
+        System.out.print("Actual: ");
+        for (int item : res) {
+            System.out.print(item + " ");
+        }
+        System.out.println();
+    }
 
+    public class Solution {
+        public int[] rearrangeArray(int[] nums) {
+            int pos = 0, neg = 0, ind = 0;
+
+            while (nums[pos] < 0)
+                pos++;
+            while (nums[neg] >= 0)
+                neg++;
+
+            int[] res = new int[nums.length];
+
+            while (ind < nums.length) {
+                if (ind % 2 == 0) {
+                    res[ind] = nums[pos];
+                    pos++;
+                } else {
+                    res[ind] = nums[neg];
+                    neg++;
+                }
+
+                while (pos < nums.length && nums[pos] < 0)
+                    pos++;
+                while (neg < nums.length && nums[neg] >= 0)
+                    neg++;
+
+                ind++;
+            }
+
+            return res;
+        }
     }
 
 }

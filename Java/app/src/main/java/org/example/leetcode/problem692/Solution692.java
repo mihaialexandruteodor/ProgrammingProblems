@@ -1,5 +1,11 @@
 package org.example.leetcode.problem692;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +20,35 @@ public class Solution692 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("Expected : [i, love, coding]");
+        System.out.println("Actual: " + solution.topKFrequent(
+                new String[] { "i", "love", "leetcode", "i", "love", "coding" }, 3));
+    }
+
+    public class Solution {
+        public List<String> topKFrequent(String[] words, int k) {
+            Map<String, Integer> freqMap = new HashMap<>();
+            for (String word : words)
+                freqMap.put(word, freqMap.getOrDefault(word, 0) + 1);
+
+            PriorityQueue<String> pq = new PriorityQueue<>((a, b) -> {
+                int freqCompare = freqMap.get(b).compareTo(freqMap.get(a));
+                if (freqCompare != 0)
+                    return freqCompare;
+                return a.compareTo(b);
+            });
+
+            pq.addAll(freqMap.keySet());
+
+            List<String> result = new ArrayList<>();
+            for (int i = 0; i < k; i++)
+                result.add(pq.poll());
+
+            return result;
+        }
     }
 
 }

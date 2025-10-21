@@ -1,5 +1,11 @@
 package org.example.leetcode.problem648;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +20,57 @@ public class Solution648 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("Expected : the cat was rat by the bat");
+        System.out.println("Actual: " + solution.replaceWords(
+                Arrays.asList("cat", "bat", "rat"),
+                "the cattle was rattled by the battery"));
+    }
+
+    public class TrieNode {
+        public Map<Character, TrieNode> children = new HashMap<>();
+        public String word = null;
+    }
+
+    public class Solution {
+        private TrieNode buildTrie(List<String> dictionary) {
+            TrieNode root = new TrieNode();
+
+            for (String word : dictionary) {
+                TrieNode node = root;
+                for (char c : word.toCharArray()) {
+                    node.children.putIfAbsent(c, new TrieNode());
+                    node = node.children.get(c);
+                }
+                node.word = word; // mark the end of a root word
+            }
+
+            return root;
+        }
+
+        public String replaceWords(List<String> dictionary, String sentence) {
+            TrieNode trie = buildTrie(dictionary);
+            String[] words = sentence.split(" ");
+            List<String> result = new ArrayList<>();
+
+            for (String word : words) {
+                TrieNode node = trie;
+                String replacement = "";
+
+                for (char c : word.toCharArray()) {
+                    if (!node.children.containsKey(c) || node.word != null)
+                        break;
+                    node = node.children.get(c);
+                }
+
+                replacement = node.word != null ? node.word : word;
+                result.add(replacement);
+            }
+
+            return String.join(" ", result);
+        }
     }
 
 }

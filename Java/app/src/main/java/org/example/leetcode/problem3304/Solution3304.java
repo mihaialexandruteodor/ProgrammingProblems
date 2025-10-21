@@ -14,7 +14,33 @@ public class Solution3304 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("k = 5 ,Expected : b");
+        System.out.println("Actual: " + solution.kthCharacter(5));
+        System.out.println("Explanation:");
+        System.out.println("The function computes the k-th character based on the following logic:");
+        System.out.println("1. Subtract 1 from the input k to get (k - 1).");
+        System.out.println("2. Convert (k - 1) into its binary representation.");
+        System.out.println("3. Count the number of 1s in that binary number.");
+        System.out.println("4. Starting from the character 'a', move forward by that count.");
+        System.out.println("5. The resulting character is returned as the answer.");
+        System.out.println("This effectively maps each k to a letter based on the number of bits set to 1 in (k - 1).");
+    }
 
+    public class Solution {
+        public char kthCharacter(int k) {
+            return (char) ('a' + countBits(k - 1));
+        }
+
+        private int countBits(int n) {
+            int count = 0;
+            while (n != 0) {
+                count += n & 1;
+                n >>= 1;
+            }
+            return count;
+        }
     }
 
 }

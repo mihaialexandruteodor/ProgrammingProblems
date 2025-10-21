@@ -14,7 +14,39 @@ public class Solution647 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
 
+        System.out.println("\"abc\", expect 3, actual: " + solution.countSubstrings("abc"));
+        System.out.println("\"aaa\", expect 6, actual: " + solution.countSubstrings("aaa"));
+    }
+
+    public class Solution {
+        public int countSubstrings(String s) {
+            int res = 0;
+            int n = s.length();
+
+            for (int i = 0; i < n; i++) {
+                // Odd-length palindromes
+                int l = i, r = i;
+                while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                    res++;
+                    l--;
+                    r++;
+                }
+
+                // Even-length palindromes
+                l = i;
+                r = i + 1;
+                while (l >= 0 && r < n && s.charAt(l) == s.charAt(r)) {
+                    res++;
+                    l--;
+                    r++;
+                }
+            }
+
+            return res;
+        }
     }
 
 }
