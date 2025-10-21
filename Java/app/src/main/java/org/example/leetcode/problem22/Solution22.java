@@ -29,7 +29,7 @@ public class Solution22 extends BaseSolution {
                 "Constraints:\n" + //
                 "\n" + //
                 "1 <= n <= 8";
-        // https://leetcode.com/problems/generate-parentheses/
+        this.leetcodeurl = "https://leetcode.com/problems/generate-parentheses/";
     }
 
     class Solution {

@@ -13,6 +13,7 @@ public class Solution1625 extends BaseSolution {
         this.name = "1625. Lexicographically Smallest String After Applying Operations";
         this.difficulty = Utils.Difficulty.MEDIUM;
         this.topic = Utils.Topic.STRINGS;
+        this.leetcodeurl = "https:// leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/description/";
         this.description = "You are given a string s of even length consisting of digits from 0 to 9, and two integers a and b.\n"
                 + //
                 "\n" + //
@@ -73,7 +74,6 @@ public class Solution1625 extends BaseSolution {
 
     public class Solution {
         // BRUTE FORCE + VISITED SET
-        // https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/description/
 
         public String findLexSmallestString(String s, int a, int b) {
             Queue<String> q = new LinkedList<>();

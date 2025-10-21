@@ -9,7 +9,7 @@ public class Solution198 extends BaseSolution {
         this.difficulty = Utils.Difficulty.MEDIUM;
         this.topic = Utils.Topic.DYNAMIC_PROGRAMMING;
         this.description = "Problem: You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.\r\n\r\nGiven an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.\r\n\r\n \r\n\r\nExample 1:\r\n\r\nInput: nums = [1,2,3,1]\r\nOutput: 4\r\nExplanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).\r\nTotal amount you can rob = 1 + 3 = 4.\r\nExample 2:\r\n\r\nInput: nums = [2,7,9,3,1]\r\nOutput: 12\r\nExplanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).\r\nTotal amount you can rob = 2 + 9 + 1 = 12.\r\n \r\n\r\nConstraints:\r\n\r\n1 <= nums.length <= 100\r\n0 <= nums[i] <= 400";
-        // https://leetcode.com/problems/house-robber/
+        this.leetcodeurl = "https://leetcode.com/problems/house-robber/";
     }
 
     @Override

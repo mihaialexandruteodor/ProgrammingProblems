@@ -22,6 +22,7 @@ public abstract class BaseSolution {
     protected Utils.Difficulty difficulty = Utils.Difficulty.EASY;
     protected Utils.Topic topic = Utils.Topic.OTHER;
     protected String description = "";
+    protected String leetcodeurl = "";
 
     public String getName() {
         return name;

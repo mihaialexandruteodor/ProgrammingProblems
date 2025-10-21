@@ -11,6 +11,7 @@ public class Solution3397 extends BaseSolution {
         this.name = "3397. Maximum Number of Distinct Elements After Operations";
         this.difficulty = Utils.Difficulty.MEDIUM;
         this.topic = Utils.Topic.STRINGS;
+        this.leetcodeurl = "https:// leetcode.com/problems/maximum-number-of-distinct-elements-after-operations/description/";
         this.description = "You are given an integer array nums and an integer k.\n" + //
                 "\n" + //
                 "You are allowed to perform the following operation on each element of the array at most once:\n" + //
@@ -51,7 +52,6 @@ public class Solution3397 extends BaseSolution {
 
     public class Solution {
         // GREEDY APPROACH
-        // https://leetcode.com/problems/maximum-number-of-distinct-elements-after-operations/description/
         public int maxDistinctElements(int[] nums, int k) {
             List<Integer> numsList = new ArrayList<>();
             for (int num : nums) {

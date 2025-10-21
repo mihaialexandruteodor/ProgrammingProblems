@@ -34,7 +34,7 @@ public class Solution62 extends BaseSolution {
                 "Constraints:\n" + //
                 "\n" + //
                 "1 <= m, n <= 100";
-        // https://leetcode.com/problems/unique-paths/
+        this.leetcodeurl = "https://leetcode.com/problems/unique-paths/";
     }
 
     class Solution {
