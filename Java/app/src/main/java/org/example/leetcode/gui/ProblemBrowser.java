@@ -2,7 +2,6 @@ package org.example.leetcode.gui;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -14,44 +13,57 @@ import org.reflections.Reflections;
 import java.io.*;
 import java.lang.reflect.Modifier;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ProblemBrowser extends Application {
 
-    private final Map<Utils.Difficulty, List<BaseSolution>> problemsByDifficulty = new EnumMap<>(
-            Utils.Difficulty.class);
-    private final List<BaseSolution> allProblems = new ArrayList<>();
-    private final Map<Utils.Topic, List<BaseSolution>> problemsByTopic = new EnumMap<>(Utils.Topic.class);
+    private List<BaseSolution> allProblems = new ArrayList<>();
+    private ListView<String> listView = new ListView<>();
 
-    private ComboBox<String> topicFilter;
-    private ListView<String> listView;
-    private List<BaseSolution> currentList = new ArrayList<>();
+    private ComboBox<Utils.Difficulty> difficultyFilter;
+    private ComboBox<Utils.Topic> topicFilter;
+    private TextField searchField;
 
     @Override
     public void start(Stage primaryStage) {
-        Utils.GUI_MODE = true;
+        Utils.GUI_MODE = true; // suppress CLI printing
+
         loadProblems();
 
-        // ----- Filter dropdown -----
+        VBox root = new VBox(10);
+        root.setPadding(new javafx.geometry.Insets(10));
+
+        // Filters
+        difficultyFilter = new ComboBox<>();
+        difficultyFilter.getItems().add(null); // "All" option
+        difficultyFilter.getItems().addAll(Utils.Difficulty.values());
+        difficultyFilter.setPromptText("Filter by Difficulty");
+        difficultyFilter.setOnAction(e -> updateList());
+
         topicFilter = new ComboBox<>();
-        topicFilter.getItems().add("All");
-        topicFilter.getItems().addAll(Arrays.stream(Utils.Topic.values()).map(Enum::name).toList());
-        topicFilter.setValue("All");
-        topicFilter.setOnAction(e -> applyFilter());
+        topicFilter.getItems().add(null); // "All" option
+        topicFilter.getItems().addAll(Utils.Topic.values());
+        topicFilter.setPromptText("Filter by Topic");
+        topicFilter.setOnAction(e -> updateList());
 
-        // ----- List view -----
-        listView = new ListView<>();
-        updateListView(allProblems);
+        searchField = new TextField();
+        searchField.setPromptText("Search by problem number or text");
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> updateList());
 
+        HBox filtersBox = new HBox(10, difficultyFilter, topicFilter, searchField);
+
+        // List
+        listView.setPrefHeight(300);
+        updateList();
+
+        // Open button
         Button openButton = new Button("Open Problem");
         openButton.setOnAction(e -> {
             String selected = listView.getSelectionModel().getSelectedItem();
             if (selected != null) {
-                BaseSolution selectedProblem = currentList.stream()
+                BaseSolution selectedProblem = allProblems.stream()
                         .filter(p -> p.getName().equals(selected))
                         .findFirst().orElse(null);
                 if (selectedProblem != null) {
@@ -60,31 +72,12 @@ public class ProblemBrowser extends Application {
             }
         });
 
-        VBox mainLayout = new VBox(10,
-                new Label("Filter by topic:"), topicFilter,
-                listView, openButton);
-        mainLayout.setPadding(new Insets(10));
+        root.getChildren().addAll(filtersBox, listView, openButton);
 
-        Scene scene = new Scene(mainLayout, 700, 500);
+        Scene scene = new Scene(root, 700, 500);
         primaryStage.setTitle("LeetCode Problem Browser");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    private void applyFilter() {
-        String selected = topicFilter.getValue();
-        if (selected == null || selected.equals("All")) {
-            updateListView(allProblems);
-        } else {
-            Utils.Topic topic = Utils.Topic.valueOf(selected);
-            updateListView(problemsByTopic.getOrDefault(topic, Collections.emptyList()));
-        }
-    }
-
-    private void updateListView(List<BaseSolution> problems) {
-        currentList = problems;
-        listView.setItems(FXCollections.observableArrayList(
-                problems.stream().map(BaseSolution::getName).sorted().toList()));
     }
 
     private void loadProblems() {
@@ -97,12 +90,6 @@ public class ProblemBrowser extends Application {
             try {
                 BaseSolution instance = cls.getDeclaredConstructor().newInstance();
                 allProblems.add(instance);
-                problemsByDifficulty
-                        .computeIfAbsent(instance.getDifficulty(), k -> new ArrayList<>())
-                        .add(instance);
-                problemsByTopic
-                        .computeIfAbsent(instance.getTopic(), k -> new ArrayList<>())
-                        .add(instance);
             } catch (Exception ignored) {
             }
         }
@@ -110,10 +97,25 @@ public class ProblemBrowser extends Application {
         allProblems.sort(Comparator.comparing(BaseSolution::getName));
     }
 
+    private void updateList() {
+        Utils.Difficulty selectedDiff = difficultyFilter.getValue();
+        Utils.Topic selectedTopic = topicFilter.getValue();
+        String searchText = searchField.getText() != null ? searchField.getText().toLowerCase() : "";
+
+        List<String> filtered = allProblems.stream()
+                .filter(p -> (selectedDiff == null || p.getDifficulty() == selectedDiff))
+                .filter(p -> (selectedTopic == null || p.getTopic() == selectedTopic))
+                .filter(p -> p.getName().toLowerCase().contains(searchText))
+                .map(BaseSolution::getName)
+                .collect(Collectors.toList());
+
+        listView.setItems(FXCollections.observableArrayList(filtered));
+    }
+
     private void openProblemWindow(BaseSolution problem) {
         Stage stage = new Stage();
         VBox box = new VBox(10);
-        box.setPadding(new Insets(10));
+        box.setPadding(new javafx.geometry.Insets(10));
 
         Label title = new Label(problem.getName());
         title.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
@@ -121,83 +123,91 @@ public class ProblemBrowser extends Application {
         TextArea desc = new TextArea(problem.getDescription());
         desc.setWrapText(true);
         desc.setEditable(false);
-        desc.setPrefHeight(180);
+        desc.setPrefHeight(200);
 
-        // ---- Source Code Display ----
-        TextArea sourceArea = new TextArea(loadInnerSolutionSource(problem));
-        sourceArea.setWrapText(false);
-        sourceArea.setEditable(false);
-        sourceArea.setPrefHeight(250);
+        // Inner Solution class full source
+        TextArea solutionSource = new TextArea();
+        solutionSource.setWrapText(true);
+        solutionSource.setEditable(false);
+        solutionSource.setPrefHeight(200);
+        solutionSource.setText(getInnerSolutionSource(problem));
 
-        // ---- Output Display ----
+        // Run button + output area
+        Button runButton = new Button("Run Solution");
         TextArea outputArea = new TextArea();
         outputArea.setEditable(false);
-        outputArea.setPrefHeight(200);
         outputArea.setWrapText(true);
+        outputArea.setPrefHeight(150);
 
-        Button runButton = new Button("Run Solution");
         runButton.setOnAction(e -> {
-            outputArea.clear();
-            outputArea.appendText(runSolution(problem));
+            try {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                PrintStream ps = new PrintStream(baos);
+                PrintStream oldOut = System.out;
+                System.setOut(ps);
+
+                problem.solve();
+
+                System.out.flush();
+                System.setOut(oldOut);
+                outputArea.setText(baos.toString());
+            } catch (Exception ex) {
+                outputArea.setText(ex.toString());
+            }
         });
 
-        box.getChildren().addAll(
-                title,
-                new Label("Description:"), desc,
-                new Label("Inner Solution Code:"), sourceArea,
-                runButton,
-                new Label("Output:"), outputArea);
+        box.getChildren().addAll(title, desc, new Label("Solution Inner Class:"), solutionSource,
+                runButton, new Label("Output:"), outputArea);
 
-        stage.setScene(new Scene(box, 800, 700));
+        stage.setScene(new Scene(box, 700, 650));
         stage.setTitle(problem.getName());
         stage.show();
     }
 
-    private String runSolution(BaseSolution problem) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream oldOut = System.out;
-        System.setOut(new PrintStream(baos));
+    private String getInnerSolutionSource(BaseSolution problem) {
         try {
-            problem.solve();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            System.setOut(oldOut);
-        }
+            Class<?> cls = problem.getClass();
+            String path = System.getProperty("user.dir") + "/src/main/java/" +
+                    cls.getName().replace('.', '/') + ".java";
+            File file = new File(path);
+            if (!file.exists())
+                return "// Source not found at: " + file.getAbsolutePath();
 
-        // Strip ANSI colors (if printProblem was used accidentally)
-        return baos.toString()
-                .replaceAll("\u001B\\[[;\\d]*m", "");
+            List<String> lines = Files.readAllLines(Paths.get(file.getAbsolutePath()));
+            StringBuilder sb = new StringBuilder();
+            boolean inSolution = false;
+            int braceCount = 0;
+
+            for (String line : lines) {
+                if (!inSolution) {
+                    // Match any class Solution declaration
+                    if (line.matches(".*\\bclass\\s+Solution\\b.*")) {
+                        inSolution = true;
+                        braceCount = countChar(line, '{') - countChar(line, '}');
+                        continue; // skip the declaration line
+                    }
+                } else {
+                    braceCount += countChar(line, '{') - countChar(line, '}');
+                    if (braceCount <= 0)
+                        break; // finished inner class
+                    sb.append(line).append("\n");
+                }
+            }
+
+            if (!inSolution)
+                return "// Inner Solution class not found";
+            return sb.toString().trim();
+        } catch (Exception e) {
+            return "// Unable to read inner Solution class: " + e.getMessage();
+        }
     }
 
-    /**
-     * Reads only the inner 'Solution' class from the problem source file.
-     */
-    private String loadInnerSolutionSource(BaseSolution problem) {
-        try {
-            String baseDir = System.getProperty("user.dir");
-            String packagePath = problem.getClass().getPackageName().replace('.', '/');
-            String className = problem.getClass().getSimpleName() + ".java";
-            Path srcPath = Path.of(baseDir, "src", "main", "java", packagePath, className);
-
-            if (!Files.exists(srcPath)) {
-                return "// Source not found at: " + srcPath;
-            }
-
-            String source = Files.readString(srcPath);
-
-            // Regex to extract the inner Solution class contents
-            Pattern pattern = Pattern.compile(
-                    "(?s)class\\s+Solution\\s*\\{(.*)\\}\\s*$");
-            Matcher matcher = pattern.matcher(source);
-            if (matcher.find()) {
-                return matcher.group(1).strip();
-            } else {
-                return "// Inner class 'Solution' not found in " + className;
-            }
-        } catch (IOException e) {
-            return "// Unable to read source for " + problem.getName();
-        }
+    private int countChar(String s, char c) {
+        int cnt = 0;
+        for (char ch : s.toCharArray())
+            if (ch == c)
+                cnt++;
+        return cnt;
     }
 
     public static void main(String[] args) {

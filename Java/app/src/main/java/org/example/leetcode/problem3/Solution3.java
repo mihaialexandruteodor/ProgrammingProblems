@@ -15,7 +15,90 @@ public class Solution3 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("\"abcabcbb\", Expected : 3");
+        System.out.println("Actual: " + solution.lengthOfLongestSubstring("abcabcbb"));
+    }
 
+    public class Solution {
+
+        public int lengthOfLongestSubstringSubfunction(String s) {
+            int maxLen = 0;
+
+            for (int i = 0; i < s.length(); i++) {
+                for (int j = i + 1; j <= s.length(); j++) {
+                    String substr = s.substring(i, j);
+                    if (isUnique(substr)) {
+                        if (substr.length() > maxLen)
+                            maxLen = substr.length();
+                    }
+                }
+            }
+
+            return maxLen;
+        }
+
+        private boolean isUnique(String s) {
+            java.util.HashSet<Character> chars = new java.util.HashSet<>();
+            for (char c : s.toCharArray()) {
+                if (!chars.add(c))
+                    return false;
+            }
+            return true;
+        }
+
+        private boolean checkIfStringContainsNewLineCharacters(String str) {
+            if (str.isEmpty())
+                return false;
+
+            if (str.contains(" "))
+                return true;
+
+            try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.StringReader(str))) {
+                reader.readLine();
+                return reader.read() != -1;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
+        public int lengthOfLongestSubstring(String s) {
+            if (s.isEmpty())
+                return 0;
+
+            if (s.trim().isEmpty())
+                return 1;
+
+            int maxLen = 0;
+
+            if (checkIfStringContainsNewLineCharacters(s)) {
+                String[] linesArray = null;
+                boolean whiteSpaceSeparator = false;
+
+                if (s.contains("\\r?\\n|\\r")) {
+                    linesArray = java.util.regex.Pattern.compile("\\r?\\n|\\r").split(s);
+                } else if (s.contains(" ")) {
+                    linesArray = s.split(" ");
+                    whiteSpaceSeparator = true;
+                }
+
+                java.util.HashSet<String> lines = new java.util.HashSet<>(java.util.Arrays.asList(linesArray));
+
+                for (String line : lines) {
+                    int len = lengthOfLongestSubstringSubfunction(line);
+                    if (len > maxLen) {
+                        maxLen = len;
+                        if (whiteSpaceSeparator)
+                            maxLen++; // +1 on account of the whitespace separator
+                    }
+                }
+
+                return maxLen;
+            }
+
+            return lengthOfLongestSubstringSubfunction(s);
+        }
     }
 
 }

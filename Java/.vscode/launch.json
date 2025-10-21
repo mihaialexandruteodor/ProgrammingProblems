@@ -6,7 +6,6 @@
       "name": "Run CLI (App.java)",
       "request": "launch",
       "mainClass": "org.example.App",
-      "projectName": "app",
       "preLaunchTask": "Gradle: run CLI"
     },
     {
@@ -14,7 +13,6 @@
       "name": "Run GUI (ProblemBrowser)",
       "request": "launch",
       "mainClass": "org.example.leetcode.gui.ProblemBrowser",
-      "projectName": "app",
       "preLaunchTask": "Gradle: run GUI"
     }
   ]

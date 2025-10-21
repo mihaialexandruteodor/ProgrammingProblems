@@ -42,9 +42,16 @@ tasks.register('runGui', JavaExec) {
     mainClass.set('org.example.leetcode.gui.ProblemBrowser')
 
     doFirst {
+        // Use runtimeClasspath which is resolvable
+        def javafxJars = sourceSets.main.runtimeClasspath
+            .filter { it.name.startsWith("javafx") }
+            .collect { it.absolutePath }
         jvmArgs = [
-            '--module-path', configurations.runtimeClasspath.asPath,
-            '--add-modules', 'javafx.controls,javafx.fxml,javafx.graphics,javafx.base'
+            '--module-path', javafxJars.join(File.pathSeparator),
+            '--add-modules', 'javafx.controls,javafx.fxml'
         ]
     }
 }
+
+
+
