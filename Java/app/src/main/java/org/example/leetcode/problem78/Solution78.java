@@ -1,5 +1,8 @@
 package org.example.leetcode.problem78;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +17,30 @@ public class Solution78 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[1,2,3], Expected : [[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]]");
+        System.out.println("Actual: " + Utils.printForConsole(solution.subsets(new int[] { 1, 2, 3 })));
+    }
 
+    public class Solution {
+
+        public List<List<Integer>> subsets(int[] nums) {
+            List<List<Integer>> res = new ArrayList<>();
+
+            backtrack(0, new ArrayList<>(), nums, res);
+            return res;
+        }
+
+        private void backtrack(int start, List<Integer> current, int[] nums, List<List<Integer>> res) {
+            res.add(new ArrayList<>(current)); // Add a copy
+
+            for (int i = start; i < nums.length; i++) {
+                current.add(nums[i]);
+                backtrack(i + 1, current, nums, res);
+                current.remove(current.size() - 1); // remove last added
+            }
+        }
     }
 
 }

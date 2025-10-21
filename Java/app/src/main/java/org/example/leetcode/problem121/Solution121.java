@@ -14,7 +14,29 @@ public class Solution121 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[7,1,5,3,6,4], Expected : 5");
+        System.out.println("Actual: " + solution.maxProfit(new int[] { 7, 1, 5, 3, 6, 4 }));
+    }
 
+    public class Solution {
+        public int maxProfit(int[] prices) {
+            int buy = 0, sell = 1;
+            int maxProfit = 0;
+
+            while (sell < prices.length) {
+                int currentProfit = prices[sell] - prices[buy];
+                if (prices[buy] < prices[sell]) {
+                    maxProfit = Math.max(maxProfit, currentProfit);
+                } else {
+                    buy = sell;
+                }
+                sell++;
+            }
+
+            return maxProfit;
+        }
     }
 
 }

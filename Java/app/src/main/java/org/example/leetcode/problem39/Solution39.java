@@ -1,5 +1,8 @@
 package org.example.leetcode.problem39;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +17,35 @@ public class Solution39 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("candidates = [2,3,5], target = 8, Expected : [[2,2,2,2],[2,3,3],[3,5]]");
+        System.out.println("Actual: " + Utils.printForConsole(solution.combinationSum(new int[] { 2, 3, 5 }, 8)));
+    }
 
+    public class Solution {
+
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            List<List<Integer>> res = new ArrayList<>();
+            backtrack(candidates, target, new ArrayList<>(), 0, res);
+            return res;
+        }
+
+        private void backtrack(int[] candidates, int target, List<Integer> path, int start, List<List<Integer>> res) {
+            if (target == 0) {
+                res.add(new ArrayList<>(path));
+                return;
+            }
+
+            for (int i = start; i < candidates.length; i++) {
+                if (candidates[i] > target)
+                    continue;
+
+                path.add(candidates[i]);
+                backtrack(candidates, target - candidates[i], path, i, res); // reuse same element
+                path.remove(path.size() - 1);
+            }
+        }
     }
 
 }

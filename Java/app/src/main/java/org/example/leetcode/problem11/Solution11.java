@@ -14,7 +14,36 @@ public class Solution11 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[1,8,6,2,5,4,8,3,7], Expected : 49");
+        System.out.println("Actual: " + solution.maxArea(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 }));
+    }
 
+    public class Solution {
+
+        public int maxArea(int[] height) {
+            int mostWater = 0;
+            int left = 0;
+            int right = height.length - 1;
+
+            while (left < right) {
+                int rectangleHeight = Math.min(height[left], height[right]);
+                int length = right - left;
+                int vol = rectangleHeight * length;
+
+                if (vol > mostWater)
+                    mostWater = vol;
+
+                if (height[left] < height[right]) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+
+            return mostWater;
+        }
     }
 
 }

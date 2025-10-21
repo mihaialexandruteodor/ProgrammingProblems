@@ -14,7 +14,27 @@ public class Solution70 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("n = 3, Expected : 3");
+        System.out.println("Actual: " + solution.climbStairs(3));
+    }
 
+    public class Solution {
+
+        public int climbStairs(int n) {
+            if (n <= 2)
+                return n;
+
+            int first = 1, second = 2;
+            for (int i = 3; i <= n; i++) {
+                int third = first + second;
+                first = second;
+                second = third;
+            }
+
+            return second;
+        }
     }
 
 }

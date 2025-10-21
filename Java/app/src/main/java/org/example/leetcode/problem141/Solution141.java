@@ -2,6 +2,7 @@ package org.example.leetcode.problem141;
 
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
+import org.example.leetcode.base.Utils.ListNode;
 
 public class Solution141 extends BaseSolution {
     public Solution141() {
@@ -14,7 +15,27 @@ public class Solution141 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[3,2,0,-4], pos = 1, Expected : True");
+        System.out.println("Actual: " + solution.hasCycle(Utils.createLinkedList(new int[] { 3, 2, 0, -4 }, 1)));
+    }
 
+    public class Solution {
+        public boolean hasCycle(ListNode head) {
+            ListNode slow = head;
+            ListNode fast = head;
+
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+
+                if (slow == fast)
+                    return true;
+            }
+
+            return false;
+        }
     }
 
 }

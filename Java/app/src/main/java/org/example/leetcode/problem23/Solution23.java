@@ -2,6 +2,7 @@ package org.example.leetcode.problem23;
 
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
+import org.example.leetcode.base.Utils.ListNode;
 
 public class Solution23 extends BaseSolution {
     public Solution23() {
@@ -14,7 +15,52 @@ public class Solution23 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[[1,4,5],[1,3,4],[2,6]], Expected : [1,1,2,3,4,4,5,6]");
+        System.out.println("Actual: " + Utils.printForConsole(solution.mergeKLists(new ListNode[] {
+                Utils.createLinkedList(new int[] { 1, 4, 5 }),
+                Utils.createLinkedList(new int[] { 1, 3, 4 }),
+                Utils.createLinkedList(new int[] { 2, 6 })
+        })));
+    }
 
+    public class Solution {
+
+        public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+            ListNode dummy = new ListNode(0);
+            ListNode curr = dummy;
+
+            while (list1 != null && list2 != null) {
+                if (list1.val < list2.val) {
+                    curr.next = list1;
+                    list1 = list1.next;
+                } else {
+                    curr.next = list2;
+                    list2 = list2.next;
+                }
+                curr = curr.next;
+            }
+
+            if (list1 != null) {
+                curr.next = list1;
+            } else if (list2 != null) {
+                curr.next = list2;
+            }
+
+            return dummy.next;
+        }
+
+        public ListNode mergeKLists(ListNode[] lists) {
+            if (lists.length == 0)
+                return null;
+
+            ListNode curr = lists[0];
+            for (int i = 1; i < lists.length; ++i) {
+                curr = mergeTwoLists(curr, lists[i]);
+            }
+            return curr;
+        }
     }
 
 }

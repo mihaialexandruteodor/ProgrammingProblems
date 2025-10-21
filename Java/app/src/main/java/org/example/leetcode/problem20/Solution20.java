@@ -14,7 +14,39 @@ public class Solution20 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("() , Expected : True");
+        System.out.println("Actual: " + solution.isValid("()"));
+        System.out.println("()[]{} , Expected : True");
+        System.out.println("Actual: " + solution.isValid("()[]{}"));
+        System.out.println("(] , Expected : False");
+        System.out.println("Actual: " + solution.isValid("(]"));
+        System.out.println("([]) , Expected : True");
+        System.out.println("Actual: " + solution.isValid("([])"));
+    }
 
+    public class Solution {
+
+        public boolean isValid(String s) {
+            java.util.Map<Character, Character> closedOpen = new java.util.HashMap<>();
+            closedOpen.put(')', '(');
+            closedOpen.put(']', '[');
+            closedOpen.put('}', '{');
+
+            java.util.Stack<Character> st = new java.util.Stack<>();
+            for (char ch : s.toCharArray()) {
+                if (ch == ')' || ch == ']' || ch == '}') {
+                    if (!st.isEmpty() && closedOpen.get(ch) == st.peek())
+                        st.pop();
+                    else
+                        return false;
+                } else {
+                    st.push(ch);
+                }
+            }
+            return st.isEmpty();
+        }
     }
 
 }

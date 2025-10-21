@@ -2,6 +2,7 @@ package org.example.leetcode.problem19;
 
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
+import org.example.leetcode.base.Utils.ListNode;
 
 public class Solution19 extends BaseSolution {
     public Solution19() {
@@ -14,7 +15,34 @@ public class Solution19 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[1,2,3,4,5], n=2, Expected : [1,2,3,5]");
+        System.out.print("Actual: " + Utils.printForConsole(
+                solution.removeNthFromEnd(Utils.createLinkedList(new int[] { 1, 2, 3, 4, 5 }), 2)));
+    }
 
+    public class Solution {
+
+        public ListNode removeNthFromEnd(ListNode head, int n) {
+            java.util.List<ListNode> list = new java.util.ArrayList<>();
+            ListNode iterator = head;
+            while (iterator != null) {
+                list.add(iterator);
+                iterator = iterator.next;
+            }
+
+            int targetIndex = list.size() - n;
+            if (targetIndex == 0)
+                return head.next;
+
+            iterator = list.get(targetIndex - 1);
+            ListNode delNode = iterator.next;
+            iterator.next = delNode.next;
+            delNode.next = null;
+
+            return head;
+        }
     }
 
 }

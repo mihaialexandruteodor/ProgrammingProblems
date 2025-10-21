@@ -115,6 +115,25 @@ public final class Utils {
         return head;
     }
 
+    public static ListNode createLinkedList(int[] values, int pos) {
+        if (values == null || values.length == 0)
+            return null;
+
+        ListNode head = new ListNode(values[0]);
+        ListNode current = head;
+        ListNode loop = pos == 0 ? head : null;
+
+        for (int i = 1; i < values.length; i++) {
+            current.next = new ListNode(values[i]);
+            if (i == pos)
+                loop = current;
+            current = current.next;
+        }
+
+        current.next = loop;
+        return head;
+    }
+
     public static String printForConsole(ListNode head) {
         List<Integer> values = new ArrayList<>();
         while (head != null) {
@@ -175,4 +194,89 @@ public final class Utils {
             this.val = val;
         }
     }
+
+    // Node definition
+    public static class Node {
+        public int val;
+        public List<Node> neighbors;
+
+        Node() {
+            val = 0;
+            neighbors = new ArrayList<>();
+        }
+
+        public Node(int val) {
+            this.val = val;
+            neighbors = new ArrayList<>();
+        }
+
+        Node(int val, List<Node> neighbors) {
+            this.val = val;
+            this.neighbors = neighbors;
+        }
+    }
+
+    public static Node buildGraph(int[][] adjList) {
+        if (adjList == null || adjList.length == 0)
+            return null;
+
+        // Step 1: Create all nodes
+        Map<Integer, Node> nodeMap = new HashMap<>();
+        for (int i = 0; i < adjList.length; i++) {
+            int nodeVal = i + 1;
+            nodeMap.put(nodeVal, new Node(nodeVal));
+        }
+
+        // Step 2: Link neighbors
+        for (int i = 0; i < adjList.length; i++) {
+            int nodeVal = i + 1;
+            Node currentNode = nodeMap.get(nodeVal);
+            for (int neighborVal : adjList[i]) {
+                currentNode.neighbors.add(nodeMap.get(neighborVal));
+            }
+        }
+
+        return nodeMap.get(1); // Return node with value 1 as entry point
+    }
+
+    public static void printGraph(Node root) {
+        if (root == null) {
+            System.out.println("[]");
+            return;
+        }
+
+        // Use BFS to explore all nodes and map neighbors
+        Map<Integer, List<Integer>> graphMap = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+        Queue<Node> queue = new LinkedList<>();
+
+        queue.add(root);
+        visited.add(root.val);
+
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            graphMap.putIfAbsent(current.val, new ArrayList<>());
+
+            for (Node neighbor : current.neighbors) {
+                graphMap.get(current.val).add(neighbor.val);
+                if (!visited.contains(neighbor.val)) {
+                    visited.add(neighbor.val);
+                    queue.add(neighbor);
+                }
+            }
+        }
+
+        // Convert to sorted array output
+        int maxNode = Collections.max(graphMap.keySet());
+        List<String> output = new ArrayList<>();
+
+        for (int i = 1; i <= maxNode; i++) {
+            List<Integer> neighbors = graphMap.getOrDefault(i, new ArrayList<>());
+            Collections.sort(neighbors);
+            output.add(Utils.printForConsole(neighbors));
+        }
+
+        System.out.println(Utils.printForConsole(output));
+    }
+
 }

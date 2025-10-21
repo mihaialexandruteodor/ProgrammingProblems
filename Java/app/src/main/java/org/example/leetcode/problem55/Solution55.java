@@ -14,7 +14,37 @@ public class Solution55 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[2,3,1,1,4], Expected : True");
+        System.out.println("Actual: " + solution.canJump(new int[] { 2, 3, 1, 1, 4 }));
+    }
 
+    public class Solution {
+
+        public boolean jump(int position, int[] nums) {
+            if (position == nums.length - 1)
+                return true;
+
+            int maxJumpLen = nums[position];
+            if (maxJumpLen == 0)
+                return false;
+
+            if (position + maxJumpLen >= nums.length - 1)
+                return true;
+
+            for (int i = maxJumpLen; i >= 1; --i) {
+                nums[position] = 0;
+                if (jump(position + i, nums))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public boolean canJump(int[] nums) {
+            return jump(0, nums);
+        }
     }
 
 }

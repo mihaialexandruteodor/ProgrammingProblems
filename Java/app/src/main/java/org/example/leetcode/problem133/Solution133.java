@@ -1,5 +1,8 @@
 package org.example.leetcode.problem133;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +17,35 @@ public class Solution133 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        int[][] edges = new int[][] { { 2, 4 }, { 1, 3 }, { 2, 4 }, { 1, 3 } };
+        Solution solution = new Solution();
+        System.out.println("adjList = [[2,4],[1,3],[2,4],[1,3]] Expected : [[2,4],[1,3],[2,4],[1,3]]");
+        System.out.print("Actual: ");
+        Utils.printGraph(solution.cloneGraph(Utils.buildGraph(edges)));
+    }
 
+    public class Solution {
+        private Map<Utils.Node, Utils.Node> nodesMap;
+
+        public Utils.Node cloneGraph(Utils.Node node) {
+            if (node == null)
+                return null;
+            nodesMap = new HashMap<>();
+            return dfsClone(node);
+        }
+
+        private Utils.Node dfsClone(Utils.Node node) {
+            if (nodesMap.containsKey(node))
+                return nodesMap.get(node);
+
+            Utils.Node copy = new Utils.Node(node.val);
+            nodesMap.put(node, copy);
+            for (Utils.Node neighbor : node.neighbors) {
+                copy.neighbors.add(dfsClone(neighbor));
+            }
+            return copy;
+        }
     }
 
 }

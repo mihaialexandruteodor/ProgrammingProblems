@@ -1,5 +1,9 @@
 package org.example.leetcode.problem56;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +18,42 @@ public class Solution56 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[[1,3],[2,6],[8,10],[15,18]], Expected : [[1,6],[8,10],[15,18]]");
+        int[][] result = solution.merge(new int[][] {
+                { 1, 3 }, { 2, 6 }, { 8, 10 }, { 15, 18 }
+        });
+        for (int[] interval : result) {
+            System.out.println(Arrays.toString(interval));
+        }
+    }
 
+    public class Solution {
+
+        public int[][] merge(int[][] intervals) {
+            if (intervals.length <= 1)
+                return intervals;
+
+            Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+
+            List<int[]> newIntervals = new ArrayList<>();
+            newIntervals.add(intervals[0]);
+
+            for (int i = 1; i < intervals.length; ++i) {
+                int start = intervals[i][0];
+                int end = intervals[i][1];
+                int lastEnd = newIntervals.get(newIntervals.size() - 1)[1];
+
+                if (start <= lastEnd) {
+                    newIntervals.get(newIntervals.size() - 1)[1] = Math.max(lastEnd, end);
+                } else {
+                    newIntervals.add(intervals[i]);
+                }
+            }
+
+            return newIntervals.toArray(new int[newIntervals.size()][]);
+        }
     }
 
 }

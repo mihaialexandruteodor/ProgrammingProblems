@@ -14,7 +14,52 @@ public class Solution15 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[-1,0,1,2,-1,-4], Expected : [[-1,-1,2],[-1,0,1]]");
+        System.out.print("Actual: " + Utils.printForConsole(solution.threeSum(new int[] { -1, 0, 1, 2, -1, -4 })));
+    }
 
+    public class Solution {
+
+        public static class ListComparer implements java.util.Comparator<java.util.List<Integer>> {
+            @Override
+            public int compare(java.util.List<Integer> a, java.util.List<Integer> b) {
+                if (a == null && b == null)
+                    return 0;
+                if (a == null)
+                    return -1;
+                if (b == null)
+                    return 1;
+                int n = Math.min(a.size(), b.size());
+                for (int i = 0; i < n; i++) {
+                    int cmp = Integer.compare(a.get(i), b.get(i));
+                    if (cmp != 0)
+                        return cmp;
+                }
+                return Integer.compare(a.size(), b.size());
+            }
+        }
+
+        public java.util.List<java.util.List<Integer>> threeSum(int[] nums) {
+            java.util.Set<java.util.List<Integer>> sol = new java.util.TreeSet<>(new ListComparer());
+            java.util.Arrays.sort(nums);
+            for (int i = 0; i < nums.length - 2; ++i) {
+                int j = i + 1, k = nums.length - 1;
+                while (j < k) {
+                    int sum = nums[i] + nums[j] + nums[k];
+                    if (sum == 0) {
+                        sol.add(java.util.Arrays.asList(nums[i], nums[j], nums[k]));
+                        j++;
+                    } else if (sum > 0) {
+                        k--;
+                    } else {
+                        j++;
+                    }
+                }
+            }
+            return new java.util.ArrayList<>(sol);
+        }
     }
 
 }

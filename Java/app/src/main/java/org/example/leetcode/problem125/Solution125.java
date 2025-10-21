@@ -14,7 +14,31 @@ public class Solution125 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("\"A man, a plan, a canal: Panama\", Expected : True");
+        System.out.println("Actual: " + solution.isPalindrome("A man, a plan, a canal: Panama"));
+    }
 
+    public class Solution {
+        public boolean isPalindrome(String s) {
+            int l = 0, r = s.length() - 1;
+
+            while (l < r) {
+                while (l < r && !Character.isLetterOrDigit(s.charAt(l)))
+                    l++;
+                while (l < r && !Character.isLetterOrDigit(s.charAt(r)))
+                    r--;
+
+                if (Character.toLowerCase(s.charAt(l)) != Character.toLowerCase(s.charAt(r)))
+                    return false;
+
+                l++;
+                r--;
+            }
+
+            return true;
+        }
     }
 
 }

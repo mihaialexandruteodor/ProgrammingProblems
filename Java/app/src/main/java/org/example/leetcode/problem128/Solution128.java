@@ -1,5 +1,7 @@
 package org.example.leetcode.problem128;
 
+import java.util.TreeSet;
+
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
 
@@ -14,7 +16,38 @@ public class Solution128 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("[100,4,200,1,3,2], Expected : 4");
+        System.out.println("Actual: " + solution.longestConsecutive(new int[] { 100, 4, 200, 1, 3, 2 }));
+    }
 
+    public class Solution {
+        public int longestConsecutive(int[] nums) {
+            if (nums.length == 0)
+                return 0;
+
+            TreeSet<Integer> vals = new TreeSet<>();
+            for (int num : nums)
+                vals.add(num);
+
+            int maxConsec = 0;
+            int currConsec = 1;
+            int prevVal = vals.first() - 2;
+
+            for (int val : vals) {
+                if (val - prevVal == 1)
+                    currConsec++;
+                else {
+                    maxConsec = Math.max(maxConsec, currConsec);
+                    currConsec = 1;
+                }
+                prevVal = val;
+            }
+
+            maxConsec = Math.max(maxConsec, currConsec);
+            return maxConsec;
+        }
     }
 
 }

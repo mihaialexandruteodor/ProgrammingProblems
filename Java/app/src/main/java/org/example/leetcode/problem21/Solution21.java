@@ -2,6 +2,7 @@ package org.example.leetcode.problem21;
 
 import org.example.leetcode.base.BaseSolution;
 import org.example.leetcode.base.Utils;
+import org.example.leetcode.base.Utils.ListNode;
 
 public class Solution21 extends BaseSolution {
     public Solution21() {
@@ -14,7 +15,39 @@ public class Solution21 extends BaseSolution {
 
     @Override
     public void solve() {
+        Utils.getInstance().printProblem(description, difficulty, topic);
+        Solution solution = new Solution();
+        System.out.println("list1 = [1,2,4], list2 = [1,3,4], Expected : [1,1,2,3,4,4]");
+        System.out.println("Actual: " + Utils.printForConsole(solution.mergeTwoLists(
+                Utils.createLinkedList(new int[] { 1, 2, 4 }),
+                Utils.createLinkedList(new int[] { 1, 3, 4 }))));
+    }
 
+    public class Solution {
+
+        public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+            ListNode dummy = new ListNode(0);
+            ListNode curr = dummy;
+
+            while (list1 != null && list2 != null) {
+                if (list1.val < list2.val) {
+                    curr.next = list1;
+                    list1 = list1.next;
+                } else {
+                    curr.next = list2;
+                    list2 = list2.next;
+                }
+                curr = curr.next;
+            }
+
+            if (list1 != null) {
+                curr.next = list1;
+            } else if (list2 != null) {
+                curr.next = list2;
+            }
+
+            return dummy.next;
+        }
     }
 
 }
