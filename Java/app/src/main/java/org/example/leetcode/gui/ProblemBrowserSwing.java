@@ -16,10 +16,8 @@ import java.lang.reflect.Modifier;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ProblemBrowserSwing {
@@ -64,7 +62,8 @@ public class ProblemBrowserSwing {
             e.printStackTrace();
         }
 
-        FontUIResource f = new FontUIResource("Segoe UI", Font.PLAIN, 16);
+        // default font +2 size
+        FontUIResource f = new FontUIResource("Segoe UI", Font.PLAIN, 18);
         setUIFont(f);
 
         frame = new JFrame("LeetCode Problem Browser");
@@ -89,7 +88,7 @@ public class ProblemBrowserSwing {
         searchField = new JTextField(20);
         searchField.getDocument().addDocumentListener((SimpleDocumentListener) this::updateList);
 
-        // Font size buttons
+        // font size buttons
         JButton increaseFontBtn = new JButton("+");
         JButton decreaseFontBtn = new JButton("-");
         increaseFontBtn.addActionListener(e -> adjustFontSize(2));
@@ -158,7 +157,7 @@ public class ProblemBrowserSwing {
         topPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         JLabel title = new JLabel(problem.getName());
-        title.setFont(title.getFont().deriveFont(Font.BOLD, 18f));
+        title.setFont(title.getFont().deriveFont(Font.BOLD, 20f));
         topPanel.add(title, BorderLayout.NORTH);
 
         JTextArea descArea = new JTextArea(problem.getDescription());
@@ -230,7 +229,7 @@ public class ProblemBrowserSwing {
     private JTextPane createCodePane(String code) {
         JTextPane codePane = new JTextPane();
         codePane.setEditable(false);
-        codePane.setFont(new Font("Consolas", Font.PLAIN, 14));
+        codePane.setFont(new Font("Consolas", Font.PLAIN, 18));
 
         StyledDocument doc = codePane.getStyledDocument();
         addStylesToDocument(doc);
@@ -251,25 +250,50 @@ public class ProblemBrowserSwing {
         StyleConstants.setForeground(defaultStyle, Color.WHITE);
 
         Style keyword = doc.addStyle("keyword", null);
-        StyleConstants.setForeground(keyword, Color.CYAN);
+        StyleConstants.setForeground(keyword, new Color(102, 217, 239));
         StyleConstants.setBold(keyword, true);
 
         Style comment = doc.addStyle("comment", null);
-        StyleConstants.setForeground(comment, Color.GREEN.darker());
+        StyleConstants.setForeground(comment, new Color(117, 113, 94));
+        StyleConstants.setItalic(comment, true);
 
         Style string = doc.addStyle("string", null);
-        StyleConstants.setForeground(string, Color.ORANGE);
+        StyleConstants.setForeground(string, new Color(255, 198, 109));
+
+        Style type = doc.addStyle("type", null);
+        StyleConstants.setForeground(type, new Color(166, 226, 46));
+        StyleConstants.setBold(type, true);
+
+        Style number = doc.addStyle("number", null);
+        StyleConstants.setForeground(number, new Color(174, 129, 255));
+
+        Style annotation = doc.addStyle("annotation", null);
+        StyleConstants.setForeground(annotation, new Color(166, 226, 46));
+
+        Style bracket = doc.addStyle("bracket", null);
+        StyleConstants.setForeground(bracket, new Color(249, 38, 114));
+
+        Style variable = doc.addStyle("variable", null);
+        StyleConstants.setForeground(variable, new Color(97, 175, 239));
     }
 
     private void highlightJavaSyntax(StyledDocument doc, String code) {
-        String[] keywords = new String[] {
-                "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
-                "const", "continue", "default", "do", "double", "else", "enum", "extends", "final",
-                "finally", "float", "for", "if", "implements", "import", "instanceof", "int", "interface",
-                "long", "native", "new", "package", "private", "protected", "public", "return", "short",
-                "static", "strictfp", "super", "switch", "synchronized", "this", "throw", "throws",
-                "transient", "try", "void", "volatile", "while"
+        String[] keywords = {
+                "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", "continue",
+                "default", "do",
+                "double", "else", "enum", "extends", "final", "finally", "float", "for", "if", "implements", "import",
+                "instanceof",
+                "int", "interface", "long", "native", "new", "package", "private", "protected", "public", "return",
+                "short", "static",
+                "strictfp", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "try", "void",
+                "volatile", "while"
         };
+
+        String[] types = { "String", "Integer", "Double", "Float", "List", "Map", "Set", "HashMap", "ArrayList",
+                "HashSet", "Object" };
+
+        Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        Set<String> typeSet = new HashSet<>(Arrays.asList(types));
 
         try {
             String[] lines = code.split("\n");
@@ -282,10 +306,23 @@ public class ProblemBrowserSwing {
                     for (String kw : keywords) {
                         int idx = line.indexOf(kw);
                         while (idx >= 0) {
-                            doc.setCharacterAttributes(offset + idx, kw.length(), doc.getStyle("keyword"), false);
+                            if (isStandaloneToken(line, idx, kw.length())) {
+                                doc.setCharacterAttributes(offset + idx, kw.length(), doc.getStyle("keyword"), false);
+                            }
                             idx = line.indexOf(kw, idx + kw.length());
                         }
                     }
+
+                    for (String tp : types) {
+                        int idx = line.indexOf(tp);
+                        while (idx >= 0) {
+                            if (isStandaloneToken(line, idx, tp.length())) {
+                                doc.setCharacterAttributes(offset + idx, tp.length(), doc.getStyle("type"), false);
+                            }
+                            idx = line.indexOf(tp, idx + tp.length());
+                        }
+                    }
+
                     int start = line.indexOf("\"");
                     while (start >= 0) {
                         int end = line.indexOf("\"", start + 1);
@@ -293,6 +330,54 @@ public class ProblemBrowserSwing {
                             break;
                         doc.setCharacterAttributes(offset + start, end - start + 1, doc.getStyle("string"), false);
                         start = line.indexOf("\"", end + 1);
+                    }
+
+                    for (int i = 0; i < line.length(); i++) {
+                        if (Character.isDigit(line.charAt(i))) {
+                            int len = 1;
+                            while (i + len < line.length()
+                                    && (Character.isDigit(line.charAt(i + len)) || line.charAt(i + len) == '.'))
+                                len++;
+                            doc.setCharacterAttributes(offset + i, len, doc.getStyle("number"), false);
+                            i += len - 1;
+                        }
+                    }
+
+                    int annIdx = line.indexOf("@");
+                    while (annIdx >= 0) {
+                        int len = 1;
+                        while (annIdx + len < line.length()
+                                && Character.isJavaIdentifierPart(line.charAt(annIdx + len)))
+                            len++;
+                        doc.setCharacterAttributes(offset + annIdx, len, doc.getStyle("annotation"), false);
+                        annIdx = line.indexOf("@", annIdx + len);
+                    }
+
+                    for (char c : new char[] { '{', '}', '(', ')', '[', ']' }) {
+                        int idx = line.indexOf(c);
+                        while (idx >= 0) {
+                            doc.setCharacterAttributes(offset + idx, 1, doc.getStyle("bracket"), false);
+                            idx = line.indexOf(c, idx + 1);
+                        }
+                    }
+
+                    // variables
+                    String[] tokens = line.split("[^A-Za-z0-9_]");
+                    for (String token : tokens) {
+                        if (token.matches("[A-Za-z_][A-Za-z0-9_]*") &&
+                                !keywordSet.contains(token) &&
+                                !typeSet.contains(token) &&
+                                !token.startsWith("@")) {
+
+                            int idx = line.indexOf(token);
+                            while (idx >= 0) {
+                                if (isStandaloneToken(line, idx, token.length())) {
+                                    doc.setCharacterAttributes(offset + idx, token.length(), doc.getStyle("variable"),
+                                            false);
+                                }
+                                idx = line.indexOf(token, idx + token.length());
+                            }
+                        }
                     }
                 }
                 offset += line.length() + 1;
@@ -302,10 +387,16 @@ public class ProblemBrowserSwing {
         }
     }
 
+    private boolean isStandaloneToken(String line, int idx, int length) {
+        boolean beforeOK = idx == 0 || !Character.isJavaIdentifierPart(line.charAt(idx - 1));
+        boolean afterOK = (idx + length >= line.length()) || !Character.isJavaIdentifierPart(line.charAt(idx + length));
+        return beforeOK && afterOK;
+    }
+
     private void adjustFontSize(int delta) {
         Font f = UIManager.getFont("Label.font");
         if (f == null)
-            f = new Font("Segoe UI", Font.PLAIN, 16);
+            f = new Font("Segoe UI", Font.PLAIN, 18);
         Font newFont = f.deriveFont((float) (f.getSize() + delta));
         setUIFont(new FontUIResource(newFont));
         SwingUtilities.updateComponentTreeUI(frame);
